@@ -8,8 +8,9 @@
 
 | 패치 | 최신 버전 | 저장소 |
 |---|---|---|
-| 태합입지전 V DX 한국어 패치 | v1.02 | [TAIKO_RISSHIDEN_V_DX_KOREAN_LOCALIZATION_RELEASE](https://github.com/TeamLimRyan/TAIKO_RISSHIDEN_V_DX_KOREAN_LOCALIZATION_RELEASE) |
+| 요괴워치 3 스키야키 한국어 패치 | v0.1.0 | [YW3_SUKIYAKI_KOREAN_LOCALIZATION_RELEASE](https://github.com/TeamLimRyan/YW3_SUKIYAKI_KOREAN_LOCALIZATION_RELEASE) |
 | 두근두근 메모리얼 forever with you 이모셔널 한국어 패치 | 1.0.0-ko-20260801 | [TOKIMEMO_EMOTIONAL_KOREAN_LOCALIZATION_RELEASE](https://github.com/TeamLimRyan/TOKIMEMO_EMOTIONAL_KOREAN_LOCALIZATION_RELEASE) |
+| 태합입지전 V DX 한국어 패치 | v1.02 | [TAIKO_RISSHIDEN_V_DX_KOREAN_LOCALIZATION_RELEASE](https://github.com/TeamLimRyan/TAIKO_RISSHIDEN_V_DX_KOREAN_LOCALIZATION_RELEASE) |
 
 패치 파일 자체는 이 저장소에 두지 않습니다. 각 패치 저장소의 GitHub Releases 자산으로 직접 연결합니다.
 

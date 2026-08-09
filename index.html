@@ -4,12 +4,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>임라이언 번역방 · 한국어 패치</title>
-<meta name="description" content="태합입지전 V DX, 두근두근 메모리얼 forever with you 이모셔널 비공식 한국어 패치 — by 임라이언" />
+<meta name="description" content="요괴워치 3 스키야키, 두근두근 메모리얼 이모셔널, 태합입지전 V DX 비공식 한국어 패치 — by 임라이언" />
 <link rel="icon" type="image/png" href="./favicon.png" />
 
 <meta property="og:type" content="website" />
 <meta property="og:title" content="임라이언 번역방 · 한국어 패치" />
-<meta property="og:description" content="태합입지전 V DX, 두근두근 메모리얼 이모셔널 비공식 한국어 패치" />
+<meta property="og:description" content="요괴워치 3 스키야키, 두근두근 메모리얼 이모셔널, 태합입지전 V DX 비공식 한국어 패치" />
 <meta property="og:image" content="./assets/hero.jpg" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -468,7 +468,7 @@
 <div class="notice" id="notice">
   <div class="wrap">
     <span class="tag">공지</span>
-    <p>태합입지전 V DX 한국어 패치 <strong>v1.02</strong> 배포 — v1.01 사용자는 반드시 <strong>원본 복원</strong> 후 적용하세요.</p>
+    <p>요괴워치 3 스키야키 한국어 패치 <strong>v0.1.0</strong> 공개 — 남은 이미지 식자를 도와주실 분을 찾습니다.</p>
     <button type="button" aria-label="공지 닫기" onclick="document.getElementById('notice').remove()">×</button>
   </div>
 </div>
@@ -524,6 +524,127 @@
       <h2 class="head">패치 다운로드</h2>
 
       <div class="cards">
+
+        <!-- 요괴워치 3 스키야키 -->
+        <article class="card">
+          <div class="card-top">
+            <div class="card-txt">
+              <h3>요괴워치 3 스키야키 한국어 패치</h3>
+              <p class="latin">Yo-kai Watch 3 Sukiyaki &middot; Nintendo 3DS</p>
+              <p class="meta">v0.1.0 &middot; 2026-08-09 &middot; 약 47MB</p>
+            </div>
+            <div class="card-act">
+              <a class="btn primary"
+                 href="https://github.com/TeamLimRyan/YW3_SUKIYAKI_KOREAN_LOCALIZATION_RELEASE/releases/download/v0.1.0/YW3S_Korean_Patch_v0.1.0.zip">↓ 다운로드</a>
+              <a class="btn"
+                 href="https://github.com/TeamLimRyan/YW3_SUKIYAKI_KOREAN_LOCALIZATION_RELEASE"
+                 target="_blank" rel="noopener">자세히 ↗</a>
+            </div>
+          </div>
+
+          <details class="more">
+            <summary>지원 환경과 설치 방법</summary>
+            <div class="more-body">
+
+              <div class="warn">
+                <strong>아직 검수가 끝나지 않은 첫 공개판입니다.</strong>
+                텍스트는 132,357개 전부 번역했지만, 이미지는 1,861개 중 1,685개(90.5%)만 반영했고
+                남은 176개는 원본 그대로 나옵니다. 후반 스토리·전투·통신·오류·엔딩 구간과
+                Luma3DS 실기 최종 검수는 아직 남아 있습니다.
+                <br />남은 이미지 식자를 도와주실 분을 찾고 있습니다 —
+                <a href="https://github.com/TeamLimRyan/YW3_SUKIYAKI_KOREAN_LOCALIZATION_RELEASE/blob/main/IMAGE_LOCALIZATION_STATUS.md"
+                   target="_blank" rel="noopener">작업자 모집 안내 ↗</a>
+              </div>
+
+              <h4>지원 환경</h4>
+              <ul>
+                <li>닌텐도 3DS 일본판 <code>妖怪ウォッチ３ スキヤキ</code> 버전 <code>0.2.0</code></li>
+                <li>Title ID <code>00040000001AF400</code> · Product Code <code>CTR-P-ALZJ</code></li>
+                <li>Luma3DS 또는 지원 에뮬레이터의 LayeredFS 환경</li>
+                <li>원본 <code>yw_a.fa</code> SHA-256 <code>CB5C8C0F…BD779B</code> 와 일치하는 파일</li>
+              </ul>
+
+              <h4>설치</h4>
+              <ol>
+                <li>정품 게임에서 원본 <code>yw_a.fa</code>를 직접 준비합니다.</li>
+                <li>ZIP을 별도 폴더에 풉니다.</li>
+                <li><code>apply_patch.bat</code>를 실행하고 원본 <code>yw_a.fa</code> 경로를 입력합니다.</li>
+                <li>같은 폴더에 생긴 <code>yw_a.ko.fa</code>의 완료 메시지와 SHA-256을 확인합니다.</li>
+                <li>원본은 따로 보관하고, 생성된 파일을 <code>yw_a.fa</code>라는 이름으로 LayeredFS 경로에 넣습니다.</li>
+              </ol>
+              <p style="margin:10px 0 0">
+                명령행에서는 <code>apply_patch.bat "원본\yw_a.fa" "출력\yw_a.ko.fa"</code> 로도 실행할 수 있습니다.
+                원본 지문이 다르면 파일을 건드리지 않고 중단합니다.
+                CIA, ROM, 키, 펌웨어, 원본 게임 데이터는 들어 있지 않습니다.
+              </p>
+
+              <h4>파일 무결성</h4>
+              <p style="margin:0 0 4px"><code>YW3S_Korean_Patch_v0.1.0.zip</code> SHA-256</p>
+              <code class="hash">672EEB78E77AC09CA53935B1B2029FED6F58ECFD920FE296189530FE630A38E8</code>
+              <p style="margin:8px 0 4px">적용 결과 <code>yw_a.ko.fa</code> SHA-256</p>
+              <code class="hash">4FE2EB54B759FEE03FB2B6525E8752F734CBBFC59EF4CC1A0C40491307364990</code>
+
+            </div>
+          </details>
+        </article>
+
+        <!-- 두근두근 메모리얼 -->
+        <article class="card">
+          <div class="card-top">
+            <div class="card-txt">
+              <h3>두근두근 메모리얼 forever with you 이모셔널 한국어 패치</h3>
+              <p class="latin">Tokimeki Memorial Emotional · Nintendo Switch</p>
+              <p class="meta">1.0.0-ko-20260801 · 2026-08-01 · 약 66MB</p>
+            </div>
+            <div class="card-act">
+              <a class="btn primary"
+                 href="https://github.com/TeamLimRyan/TOKIMEMO_EMOTIONAL_KOREAN_LOCALIZATION_RELEASE/releases/download/v1.0.0-ko-20260801/tokimemo-emotional-ko-text-patch-1.0.0-ko-20260801.zip">↓ 다운로드</a>
+              <a class="btn"
+                 href="https://github.com/TeamLimRyan/TOKIMEMO_EMOTIONAL_KOREAN_LOCALIZATION_RELEASE"
+                 target="_blank" rel="noopener">자세히 ↗</a>
+            </div>
+          </div>
+
+          <details class="more">
+            <summary>지원 환경과 설치 방법</summary>
+            <div class="more-body">
+
+              <h4>지원 환경</h4>
+              <ul>
+                <li>일본판(JP) <code>v0 / 1.0.0</code> 전용</li>
+                <li>Base Title ID <code>01005F201D534000</code></li>
+                <li>DLC1 Title ID <code>01005F201D535001</code></li>
+                <li>Build ID <code>841505539F3C3A2C…</code></li>
+              </ul>
+
+              <h4>포함 범위</h4>
+              <ul>
+                <li>텍스트 데이터 한글화, 한글 폰트 적용</li>
+                <li>문자열 기반 UI 한글화, 한글 이름 입력 지원</li>
+                <li>선정·승인된 이미지 에셋 한글화 (선정하지 않은 이미지는 제외)</li>
+                <li>Atmosphère LayeredFS 및 에뮬레이터용 모드 구조 제공</li>
+              </ul>
+
+              <h4>설치</h4>
+              <ol>
+                <li>ZIP을 내려받아 압축을 풉니다.</li>
+                <li><strong>Atmosphère</strong> — <code>patch/atmosphere/</code> 안의 내용을 SD 카드의 <code>atmosphere/</code>에 병합합니다.</li>
+                <li><strong>에뮬레이터</strong> — <code>patch/emulator_mod/01005F201D534000/TokimemoEmotionalKO/</code>를 Base 타이틀의 모드 디렉터리에 설치합니다.
+                    DLC1을 보유했다면 <code>…/01005F201D535001/TokimemoEmotionalKO/</code>도 DLC1 모드 디렉터리에 설치합니다.</li>
+                <li>일본판 <code>v0 / 1.0.0</code>을 실행합니다.</li>
+              </ol>
+
+              <p style="margin:12px 0 0">
+                변경 파일만 제공합니다. XCI, NSP, NCA, 암호화 키, 원본 실행 파일과 세이브 데이터는 포함하지 않습니다.
+                2026-08-01 실기기 설치·정상 구동을 확인했습니다.
+              </p>
+
+              <h4>파일 무결성</h4>
+              <code class="hash">dc424207cdf623811828525e7fdbbb00383bf5320946a21dbbb1cb3599d7d89e</code>
+
+            </div>
+          </details>
+        </article>
 
         <!-- 태합입지전 V DX -->
         <article class="card">
@@ -590,64 +711,6 @@
           </details>
         </article>
 
-        <!-- 두근두근 메모리얼 -->
-        <article class="card">
-          <div class="card-top">
-            <div class="card-txt">
-              <h3>두근두근 메모리얼 forever with you 이모셔널 한국어 패치</h3>
-              <p class="latin">Tokimeki Memorial Emotional · Nintendo Switch</p>
-              <p class="meta">1.0.0-ko-20260801 · 2026-08-01 · 약 66MB</p>
-            </div>
-            <div class="card-act">
-              <a class="btn primary"
-                 href="https://github.com/TeamLimRyan/TOKIMEMO_EMOTIONAL_KOREAN_LOCALIZATION_RELEASE/releases/download/v1.0.0-ko-20260801/tokimemo-emotional-ko-text-patch-1.0.0-ko-20260801.zip">↓ 다운로드</a>
-              <a class="btn"
-                 href="https://github.com/TeamLimRyan/TOKIMEMO_EMOTIONAL_KOREAN_LOCALIZATION_RELEASE"
-                 target="_blank" rel="noopener">자세히 ↗</a>
-            </div>
-          </div>
-
-          <details class="more">
-            <summary>지원 환경과 설치 방법</summary>
-            <div class="more-body">
-
-              <h4>지원 환경</h4>
-              <ul>
-                <li>일본판(JP) <code>v0 / 1.0.0</code> 전용</li>
-                <li>Base Title ID <code>01005F201D534000</code></li>
-                <li>DLC1 Title ID <code>01005F201D535001</code></li>
-                <li>Build ID <code>841505539F3C3A2C…</code></li>
-              </ul>
-
-              <h4>포함 범위</h4>
-              <ul>
-                <li>텍스트 데이터 한글화, 한글 폰트 적용</li>
-                <li>문자열 기반 UI 한글화, 한글 이름 입력 지원</li>
-                <li>선정·승인된 이미지 에셋 한글화 (선정하지 않은 이미지는 제외)</li>
-                <li>Atmosphère LayeredFS 및 에뮬레이터용 모드 구조 제공</li>
-              </ul>
-
-              <h4>설치</h4>
-              <ol>
-                <li>ZIP을 내려받아 압축을 풉니다.</li>
-                <li><strong>Atmosphère</strong> — <code>patch/atmosphere/</code> 안의 내용을 SD 카드의 <code>atmosphere/</code>에 병합합니다.</li>
-                <li><strong>에뮬레이터</strong> — <code>patch/emulator_mod/01005F201D534000/TokimemoEmotionalKO/</code>를 Base 타이틀의 모드 디렉터리에 설치합니다.
-                    DLC1을 보유했다면 <code>…/01005F201D535001/TokimemoEmotionalKO/</code>도 DLC1 모드 디렉터리에 설치합니다.</li>
-                <li>일본판 <code>v0 / 1.0.0</code>을 실행합니다.</li>
-              </ol>
-
-              <p style="margin:12px 0 0">
-                변경 파일만 제공합니다. XCI, NSP, NCA, 암호화 키, 원본 실행 파일과 세이브 데이터는 포함하지 않습니다.
-                2026-08-01 실기기 설치·정상 구동을 확인했습니다.
-              </p>
-
-              <h4>파일 무결성</h4>
-              <code class="hash">dc424207cdf623811828525e7fdbbb00383bf5320946a21dbbb1cb3599d7d89e</code>
-
-            </div>
-          </details>
-        </article>
-
       </div>
 
       <p class="foot-note">
@@ -664,6 +727,13 @@
       <h2 class="head">진행 이력</h2>
 
       <ol class="timeline">
+        <li>
+          <span class="date">2026-08-09</span>
+          <ul>
+            <li>요괴워치 3 스키야키 한국어 패치 <strong>v0.1.0</strong> 최초 공개 — 텍스트 132,357개 전량 번역</li>
+            <li>검수 통과 이미지 1,685개 반영, 남은 176개는 원본 유지 — 식자 작업자 모집 중</li>
+          </ul>
+        </li>
         <li>
           <span class="date">2026-08-01</span>
           <ul>
