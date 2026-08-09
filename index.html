@@ -316,20 +316,97 @@
     font-size:13px; color:var(--ink-mid);
     margin:0 0 18px; max-width:60ch;
   }
-  .giscus-box{
+  .gb-form{
     border:1px solid var(--line);
     background:var(--card);
     border-radius:8px;
-    padding:14px 18px;
+    padding:16px 18px;
     box-shadow:var(--shadow);
-    min-height:220px;
+    margin-bottom:22px;
   }
-  .giscus-box .loading{
-    font-size:13px; color:var(--ink-soft);
-    text-align:center; padding:56px 0;
+  .gb-head{ display:flex; align-items:center; gap:12px; margin-bottom:10px; }
+  .gb-form input[type=text], .gb-form textarea{
+    font-family:var(--sans); font-size:14px; color:var(--ink);
+    background:var(--paper); border:1px solid var(--line);
+    border-radius:5px; padding:8px 11px;
+    width:100%; resize:vertical;
   }
-  .giscus, .giscus-frame{ width:100%; }
-  .giscus-frame{ border:none; color-scheme:light; }
+  .gb-head input[type=text]{ max-width:220px; }
+  .gb-form input::placeholder, .gb-form textarea::placeholder{ color:var(--ink-soft); }
+  .gb-form input:focus, .gb-form textarea:focus{
+    outline:none; border-color:var(--gold);
+    box-shadow:0 0 0 3px rgba(217,164,65,.18);
+  }
+  .gb-count{
+    margin-left:auto; flex:0 0 auto;
+    font-family:var(--mono); font-size:11px; color:var(--ink-soft);
+  }
+  .gb-count.over{ color:#b3421a; }
+  /* 봇 잡이 — 화면 밖으로 보내되 display:none은 피한다(일부 봇이 걸러냄) */
+  .gb-trap{
+    position:absolute !important; left:-9999px !important;
+    width:1px !important; height:1px !important; opacity:0 !important;
+  }
+  .gb-actions{ display:flex; align-items:center; gap:12px; margin-top:10px; }
+  .gb-msg{ margin:0; flex:1 1 auto; font-size:12px; color:var(--ink-soft); min-height:1.2em; }
+  .gb-msg.err{ color:#b3421a; }
+  .gb-msg.ok{ color:#4a7a2e; }
+  .gb-actions .btn{ flex:0 0 auto; }
+  .gb-actions .btn[disabled]{ opacity:.55; cursor:default; }
+
+  .gb-bar{
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    margin:0 2px 10px;
+  }
+  .gb-total{ font-size:12px; color:var(--ink-soft); }
+  .gb-admin-who{
+    margin-left:auto;
+    font-size:11px; font-family:var(--mono); color:var(--ink-soft);
+    overflow-wrap:anywhere;
+  }
+  .gb-admin{
+    flex:0 0 auto;
+    font-family:var(--sans); font-size:11px;
+    color:var(--ink-soft); background:none; cursor:pointer;
+    border:1px solid var(--line-soft); border-radius:4px;
+    padding:3px 9px;
+  }
+  .gb-admin:hover{ color:var(--ink); border-color:var(--line); background:var(--card); }
+  .gb-admin-who:empty + .gb-admin{ margin-left:auto; }
+
+  .gb-list{ display:flex; flex-direction:column; gap:10px; }
+  .gb-state{
+    margin:0; font-size:13px; color:var(--ink-soft);
+    text-align:center; padding:34px 0;
+    border:1px dashed var(--line); border-radius:8px;
+  }
+  .gb-entry{
+    border:1px solid var(--line-soft);
+    background:var(--card);
+    border-radius:8px;
+    padding:12px 16px;
+  }
+  .gb-entry .who{
+    display:flex; align-items:baseline; gap:9px; flex-wrap:wrap;
+    margin-bottom:3px;
+  }
+  .gb-entry .who b{
+    font-family:var(--serif); font-size:14px;
+    color:var(--ink); font-weight:700;
+  }
+  .gb-entry .who time{ font-family:var(--mono); font-size:11px; color:var(--ink-soft); }
+  .gb-entry p{
+    margin:0; font-size:14px; color:var(--ink-mid);
+    white-space:pre-wrap; overflow-wrap:anywhere;
+  }
+  .gb-entry .del{
+    margin-left:auto; flex:0 0 auto;
+    font-family:var(--sans); font-size:11px;
+    color:#a5502a; background:none; cursor:pointer;
+    border:1px solid #e9cdbb; border-radius:4px; padding:2px 8px;
+  }
+  .gb-entry .del:hover{ background:#fbeae0; border-color:#d99a76; }
+  .gb-entry .del[disabled]{ opacity:.5; cursor:default; }
 
   /* ---------- 푸터 ---------- */
   .footer-art{ position:relative; max-width:1120px; margin:44px auto 0; }
@@ -614,29 +691,33 @@
       <h2 class="head">방명록</h2>
       <p class="book-note">
         패치가 도움이 되셨다면 한마디 남겨 주세요. 응원은 큰 힘이 됩니다.
-        글은 이 저장소의 GitHub Discussions에 쌓이며, 남기려면 GitHub 계정으로 로그인해야 합니다.
-        버그 제보는 방명록보다 각 패치 저장소의 Issues가 더 빠릅니다.
+        로그인 없이 닉네임만 적으면 됩니다. 버그 제보는 방명록보다 각 패치 저장소의 Issues가 더 빠릅니다.
       </p>
 
-      <div class="giscus-box">
-        <div class="loading" id="gs-loading">방명록을 불러오는 중…</div>
-        <script src="https://giscus.app/client.js"
-                data-repo="TeamLimRyan/korean-patches"
-                data-repo-id="R_kgDOTzOmuA"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOTzOmuM4DC_--"
-                data-mapping="specific"
-                data-term="방명록"
-                data-strict="0"
-                data-reactions-enabled="1"
-                data-emit-metadata="0"
-                data-input-position="top"
-                data-theme="light"
-                data-lang="ko"
-                data-loading="lazy"
-                crossorigin="anonymous"
-                async>
-        </script>
+      <form class="gb-form" id="gb-form" hidden>
+        <div class="gb-head">
+          <input id="gb-name" type="text" maxlength="20" required
+                 placeholder="닉네임" autocomplete="nickname" aria-label="닉네임" />
+          <span class="gb-count" id="gb-count">0 / 500</span>
+        </div>
+        <textarea id="gb-message" maxlength="500" required rows="3"
+                  placeholder="한마디 남겨 주세요" aria-label="남길 말"></textarea>
+        <!-- 봇 잡이. 사람 눈에는 보이지 않으며, 채워져 있으면 저장하지 않는다. -->
+        <input class="gb-trap" id="gb-trap" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="gb-actions">
+          <p class="gb-msg" id="gb-msg" role="status"></p>
+          <button class="btn primary" type="submit" id="gb-submit">남기기</button>
+        </div>
+      </form>
+
+      <div class="gb-bar">
+        <span class="gb-total" id="gb-total"></span>
+        <span class="gb-admin-who" id="gb-admin-who"></span>
+        <button type="button" class="gb-admin" id="gb-admin" hidden>관리자 로그인</button>
+      </div>
+
+      <div class="gb-list" id="gb-list">
+        <p class="gb-state" id="gb-state">방명록을 불러오는 중…</p>
       </div>
     </div>
   </section>
@@ -680,41 +761,252 @@
 
     targets.forEach(function (t) { io.observe(t.el); });
   })();
+</script>
 
-  // giscus 로드되면 안내 문구 치우기 / 실패하면 대체 링크
-  (function () {
-    var box = document.querySelector('.giscus-box');
-    var loading = document.getElementById('gs-loading');
-    if (!box || !loading) return;
+<script type="module">
+  import {
+    firebaseConfig, OWNER_UID,
+    GUESTBOOK_COLLECTION, GUESTBOOK_LIMIT, COOLDOWN_SECONDS
+  } from './assets/firebase-config.js';
 
-    var done = false;
+  const SDK = 'https://www.gstatic.com/firebasejs/12.3.0';
+  const el = (id) => document.getElementById(id);
 
-    function settle() {
-      // giscus는 실패해도 iframe 안에 자기 오류 메시지를 그린다.
-      // iframe이 붙는 순간 이 안내는 역할이 끝나므로 치운다.
-      if (done || !box.querySelector('iframe.giscus-frame')) return false;
-      done = true;
-      loading.remove();
-      return true;
+  const form     = el('gb-form');
+  const listEl   = el('gb-list');
+  const stateEl  = el('gb-state');
+  const nameEl   = el('gb-name');
+  const msgEl    = el('gb-message');
+  const trapEl   = el('gb-trap');
+  const countEl  = el('gb-count');
+  const noteEl   = el('gb-msg');
+  const submitEl = el('gb-submit');
+  const adminBtn = el('gb-admin');
+  const adminWho = el('gb-admin-who');
+  const totalEl  = el('gb-total');
+
+  const COOLDOWN_KEY = 'limryan.guestbook.last';
+
+  let docs = [];
+  let isOwner = false;
+
+  function setState(text) {
+    listEl.textContent = '';
+    const p = document.createElement('p');
+    p.className = 'gb-state';
+    p.textContent = text;
+    listEl.append(p);
+  }
+
+  function note(text, kind) {
+    noteEl.textContent = text || '';
+    noteEl.className = 'gb-msg' + (kind ? ' ' + kind : '');
+  }
+
+  // 설정이 비어 있으면 방명록만 조용히 접어 두고 나머지 페이지는 그대로 둔다.
+  const ready = Object.values(firebaseConfig).every(
+    (v) => typeof v === 'string' && v.trim() !== ''
+  );
+  if (!ready) {
+    setState('방명록은 준비 중입니다. 곧 열겠습니다.');
+  } else {
+    start().catch((err) => {
+      console.error(err);
+      setState('방명록을 불러오지 못했습니다. 잠시 뒤 다시 시도해 주세요.');
+    });
+  }
+
+  async function start() {
+    const [{ initializeApp }, fs, fa] = await Promise.all([
+      import(`${SDK}/firebase-app.js`),
+      import(`${SDK}/firebase-firestore.js`),
+      import(`${SDK}/firebase-auth.js`),
+    ]);
+
+    const app = initializeApp(firebaseConfig);
+    const db  = fs.getFirestore(app);
+    const col = fs.collection(db, GUESTBOOK_COLLECTION);
+
+    form.hidden = false;
+    adminBtn.hidden = false;
+
+    // ---- 목록 ----
+    // 응답이 아예 안 오는 경우(잘못된 설정, 네트워크 차단)에는 onSnapshot의 오류
+    // 콜백이 불리지 않고 조용히 재시도만 한다. 그대로 두면 "글이 없습니다"로
+    // 잘못 보이므로, 첫 응답이 올 때까지만 시한을 걸어 둔다.
+    let arrived = false;
+    setTimeout(() => {
+      if (!arrived) setState('방명록을 불러오지 못했습니다. 잠시 뒤 다시 시도해 주세요.');
+    }, 10000);
+
+    const q = fs.query(col, fs.orderBy('createdAt', 'desc'), fs.limit(GUESTBOOK_LIMIT));
+    fs.onSnapshot(
+      q,
+      (snap) => { arrived = true; docs = snap.docs; paint(); },
+      (err) => {
+        arrived = true;
+        console.error(err);
+        setState(
+          err.code === 'permission-denied'
+            ? '방명록을 읽을 권한이 없습니다. Firestore 규칙을 확인해 주세요.'
+            : '방명록을 불러오지 못했습니다. 잠시 뒤 다시 시도해 주세요.'
+        );
+      }
+    );
+
+    function paint() {
+      totalEl.textContent = docs.length ? `${docs.length}개의 글` : '';
+      if (!docs.length) {
+        setState('아직 남겨진 글이 없습니다. 첫 글을 남겨 주세요.');
+        return;
+      }
+
+      const frag = document.createDocumentFragment();
+      for (const d of docs) {
+        const data = d.data();
+
+        const item = document.createElement('article');
+        item.className = 'gb-entry';
+
+        const who = document.createElement('div');
+        who.className = 'who';
+
+        const nameNode = document.createElement('b');
+        nameNode.textContent = data.name || '이름 없음';
+
+        const when = data.createdAt && data.createdAt.toDate ? data.createdAt.toDate() : null;
+        const timeNode = document.createElement('time');
+        timeNode.textContent = whenText(when);
+        if (when) timeNode.dateTime = when.toISOString();
+
+        who.append(nameNode, timeNode);
+
+        if (isOwner) {
+          const del = document.createElement('button');
+          del.type = 'button';
+          del.className = 'del';
+          del.textContent = '삭제';
+          del.addEventListener('click', () => remove(d.id, data.name, del));
+          who.append(del);
+        }
+
+        const body = document.createElement('p');
+        body.textContent = data.message || '';
+
+        item.append(who, body);
+        frag.append(item);
+      }
+      listEl.textContent = '';
+      listEl.append(frag);
     }
 
-    var obs = new MutationObserver(function () {
-      if (settle()) obs.disconnect();
+    // ---- 글 남기기 ----
+    msgEl.addEventListener('input', () => {
+      countEl.textContent = `${msgEl.value.length} / 500`;
     });
 
-    // 관찰을 걸기 전에 이미 붙어 있을 수 있으므로 한 번 먼저 확인한다.
-    if (!settle()) {
-      obs.observe(box, { childList: true, subtree: true });
-      setTimeout(function () {
-        if (settle()) { obs.disconnect(); return; }
-        obs.disconnect();
-        loading.innerHTML =
-          '방명록을 불러오지 못했습니다. ' +
-          '<a href="https://github.com/TeamLimRyan/korean-patches/discussions" ' +
-          'target="_blank" rel="noopener" style="color:var(--gold-deep)">GitHub Discussions에서 바로 남기기 ↗</a>';
-      }, 8000);
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // 봇 잡이가 채워졌으면 아무 일도 하지 않는다.
+      if (trapEl.value) return;
+
+      const name = nameEl.value.trim();
+      const message = msgEl.value.trim();
+
+      if (!name)    { note('닉네임을 적어 주세요.', 'err'); nameEl.focus(); return; }
+      if (!message) { note('남길 말을 적어 주세요.', 'err'); msgEl.focus(); return; }
+
+      const last = Number(localStorage.getItem(COOLDOWN_KEY) || 0);
+      const wait = Math.ceil((last + COOLDOWN_SECONDS * 1000 - Date.now()) / 1000);
+      if (wait > 0) { note(`${wait}초 뒤에 다시 남길 수 있습니다.`, 'err'); return; }
+
+      submitEl.disabled = true;
+      note('남기는 중…');
+      try {
+        await fs.addDoc(col, { name, message, createdAt: fs.serverTimestamp() });
+        localStorage.setItem(COOLDOWN_KEY, String(Date.now()));
+        msgEl.value = '';
+        countEl.textContent = '0 / 500';
+        note('남겼습니다. 고맙습니다!', 'ok');
+      } catch (err) {
+        console.error(err);
+        note(
+          err.code === 'permission-denied'
+            ? '글을 남길 권한이 없습니다. 잠시 뒤 다시 시도해 주세요.'
+            : '남기지 못했습니다. 잠시 뒤 다시 시도해 주세요.',
+          'err'
+        );
+      } finally {
+        submitEl.disabled = false;
+      }
+    });
+
+    async function remove(id, name, button) {
+      if (!confirm(`"${name || '이름 없음'}" 님의 글을 지울까요?`)) return;
+      button.disabled = true;
+      try {
+        await fs.deleteDoc(fs.doc(db, GUESTBOOK_COLLECTION, id));
+      } catch (err) {
+        console.error(err);
+        button.disabled = false;
+        alert(
+          err.code === 'permission-denied'
+            ? '지울 권한이 없습니다. firestore.rules 의 ownerUid 가 이 계정의 UID와 같은지 확인해 주세요.'
+            : '지우지 못했습니다. 잠시 뒤 다시 시도해 주세요.'
+        );
+      }
     }
-  })();
+
+    // ---- 관리자(주인) 로그인 ----
+    const auth = fa.getAuth(app);
+    const provider = new fa.GithubAuthProvider();
+
+    fa.onAuthStateChanged(auth, (user) => {
+      isOwner = Boolean(user && OWNER_UID && user.uid === OWNER_UID);
+
+      if (!user) {
+        adminBtn.textContent = '관리자 로그인';
+        adminWho.textContent = '';
+      } else if (isOwner) {
+        adminBtn.textContent = '로그아웃';
+        adminWho.textContent = '관리자로 로그인됨';
+      } else {
+        // 아직 주인으로 등록되지 않은 계정. 설정에 넣을 UID를 알려 준다.
+        adminBtn.textContent = '로그아웃';
+        adminWho.textContent = `이 계정의 UID: ${user.uid}`;
+      }
+      paint();
+    });
+
+    adminBtn.addEventListener('click', async () => {
+      if (auth.currentUser) { await fa.signOut(auth); return; }
+      try {
+        await fa.signInWithPopup(auth, provider);
+      } catch (err) {
+        console.error(err);
+        if (err.code === 'auth/popup-closed-by-user' || err.code === 'auth/cancelled-popup-request') return;
+        alert(
+          err.code === 'auth/operation-not-allowed'
+            ? 'Firebase 콘솔에서 GitHub 로그인이 아직 켜져 있지 않습니다.'
+            : err.code === 'auth/unauthorized-domain'
+              ? 'Firebase 콘솔의 승인된 도메인에 teamlimryan.github.io 를 추가해 주세요.'
+              : '로그인하지 못했습니다.'
+        );
+      }
+    });
+  }
+
+  function whenText(date) {
+    if (!date) return '방금 전';
+    const diff = Math.floor((Date.now() - date.getTime()) / 1000);
+    if (diff < 60)    return '방금 전';
+    if (diff < 3600)  return `${Math.floor(diff / 60)}분 전`;
+    if (diff < 86400) return `${Math.floor(diff / 3600)}시간 전`;
+    if (diff < 604800) return `${Math.floor(diff / 86400)}일 전`;
+    const p = (n) => String(n).padStart(2, '0');
+    return `${date.getFullYear()}-${p(date.getMonth() + 1)}-${p(date.getDate())}`;
+  }
 </script>
 
 </body>
