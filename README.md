@@ -39,6 +39,28 @@ assets/
 https://github.com/TeamLimRyan/<저장소>/releases/download/<태그>/<파일명>
 ```
 
+## 방명록
+
+giscus를 씁니다. 남긴 글은 이 저장소의 GitHub Discussions `Announcements` 카테고리에 `방명록`이라는 제목의 토론 하나로 쌓입니다. 방문자는 GitHub 계정으로 로그인해야 글을 쓸 수 있습니다.
+
+동작하려면 이 저장소에 **giscus 앱이 설치**되어 있어야 합니다.
+
+1. https://github.com/apps/giscus 접속
+2. `Install`(이미 다른 곳에 설치했다면 `Configure`)
+3. 계정 `TeamLimRyan` 선택
+4. `Only select repositories` → `korean-patches` 체크 → 저장
+
+설정값은 `index.html`의 `giscus.app/client.js` 스크립트 태그에 들어 있습니다.
+
+| 항목 | 값 |
+|---|---|
+| `data-repo-id` | `R_kgDOTzOmuA` |
+| `data-category` | `Announcements` |
+| `data-category-id` | `DIC_kwDOTzOmuM4DC_--` |
+| `data-mapping` / `data-term` | `specific` / `방명록` |
+
+스팸이나 부적절한 글은 Discussions에서 바로 삭제·차단할 수 있습니다. 앱이 없거나 로드에 실패하면 8초 뒤 Discussions로 가는 링크가 대신 표시됩니다.
+
 ## 배포
 
 `main` 브랜치에 푸시하면 GitHub Pages가 자동으로 반영합니다. 저장소 설정의 Pages 소스는 `main` 브랜치의 루트(`/`)입니다.
