@@ -1,0 +1,23 @@
+name = "limryan-guestbook"
+main = "src/index.js"
+compatibility_date = "2026-08-09"
+
+# 방명록 저장소
+[[d1_databases]]
+binding       = "DB"
+database_name = "limryan-guestbook"
+database_id   = "0bac1ee9-d6a2-435b-806f-b9b3991125b9"
+
+[vars]
+# 이 도메인에서 오는 요청만 받는다. 여러 개면 쉼표로 구분.
+ALLOWED_ORIGINS = "https://teamlimryan.github.io,http://localhost:8731,http://localhost:8732"
+
+# 같은 회선에서 다시 글을 남길 수 있을 때까지의 간격(초).
+THROTTLE_SECONDS = "30"
+
+# 한 번에 내려주는 최근 글 수.
+PAGE_SIZE = "100"
+
+# 아래 두 값은 소스에 두지 않고 secret 으로 넣는다.
+#   npx wrangler secret put ADMIN_TOKEN   ← 글을 지울 때 쓰는 관리자 암호
+#   npx wrangler secret put IP_SALT       ← 도배 방지 해시에 섞는 임의 문자열

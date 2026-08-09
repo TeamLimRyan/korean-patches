@@ -1,1 +1,3 @@
 .imgwork/
+worker/node_modules/
+worker/.wrangler/

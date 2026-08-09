@@ -16,13 +16,16 @@
 ## 구성
 
 ```
-index.html                 전체 페이지 (HTML + CSS + 스크립트 한 파일)
-favicon.png                탭 아이콘
-firestore.rules            방명록 접근 규칙 (Firebase 콘솔에 붙여넣는 용도)
+index.html                    전체 페이지 (HTML + CSS + 스크립트 한 파일)
+favicon.png                   탭 아이콘
 assets/
-  hero.jpg                 상단 일러스트
-  footer.jpg               하단 일러스트
-  firebase-config.js       방명록 설정값
+  hero.jpg                    상단 일러스트
+  footer.jpg                  하단 일러스트
+  guestbook-config.js         방명록 API 주소
+worker/                       방명록 서버 (Cloudflare Worker + D1)
+  wrangler.toml               배포 설정
+  schema.sql                  D1 테이블
+  src/index.js                API 구현
 ```
 
 빌드 과정이 없습니다. `index.html`을 브라우저로 열면 그대로 확인할 수 있습니다.
@@ -43,50 +46,57 @@ https://github.com/TeamLimRyan/<저장소>/releases/download/<태그>/<파일명
 
 ## 방명록
 
-Firebase Firestore를 씁니다.
+Cloudflare Worker + D1로 굴러갑니다. GitHub Pages는 정적 파일만 주므로 글 저장은 Worker가 맡습니다.
 
 - **글쓰기는 로그인이 필요 없습니다.** 닉네임과 내용만 적으면 됩니다.
-- **삭제는 저장소 주인만 합니다.** GitHub 계정으로 로그인했을 때, 그 UID가 등록된 주인과 같은 경우에만 각 글에 삭제 버튼이 나타납니다. 화면에서 버튼을 숨기는 것과 별개로 `firestore.rules`가 서버에서 한 번 더 막으므로, 브라우저를 조작해도 남의 글은 지워지지 않습니다.
-- 수정은 아무도 할 수 없습니다.
+- **삭제는 관리자 암호를 아는 사람만 합니다.** 페이지 방명록의 `관리자` 버튼을 눌러 암호를 넣으면 각 글에 삭제 버튼이 생깁니다.
+- 수정 기능은 없습니다.
 
-설정이 비어 있으면 방명록 자리에 "준비 중" 안내만 뜨고 나머지 페이지는 그대로 동작합니다.
+### 구성
 
-### 1. Firebase 프로젝트와 Firestore 만들기
+| 항목 | 값 |
+|---|---|
+| Worker | `limryan-guestbook` |
+| API 주소 | `https://limryan-guestbook.yw3-mobile-image-review.workers.dev` |
+| D1 데이터베이스 | `limryan-guestbook` (`0bac1ee9-d6a2-435b-806f-b9b3991125b9`) |
+| 허용 출처 | `wrangler.toml`의 `ALLOWED_ORIGINS` |
 
-1. https://console.firebase.google.com 에서 프로젝트를 만듭니다. 애널리틱스는 꺼도 됩니다.
-2. 좌측 **빌드 → Firestore Database → 데이터베이스 만들기**
-3. 위치는 `asia-northeast3` (서울), **프로덕션 모드**로 시작합니다.
-4. **규칙** 탭에 이 저장소의 [`firestore.rules`](firestore.rules) 내용을 붙여넣고 게시합니다. `ownerUid()`는 4단계에서 채웁니다.
+API 주소는 [`assets/guestbook-config.js`](assets/guestbook-config.js)에 들어 있습니다.
 
-### 2. 웹 앱 등록하고 설정값 넣기
+### API
 
-1. **프로젝트 설정(톱니바퀴) → 일반 → 내 앱 → 웹(`</>`)** 을 눌러 앱을 등록합니다.
-2. 화면에 나오는 `firebaseConfig`의 여섯 값을 [`assets/firebase-config.js`](assets/firebase-config.js)에 붙여넣습니다.
-3. 커밋해서 푸시하면 방명록이 켜집니다. 이 값들은 비밀이 아니라 공개되어도 됩니다.
+| 메서드 | 경로 | 설명 |
+|---|---|---|
+| `GET` | `/entries` | 최근 글 목록 |
+| `POST` | `/entries` | 글 남기기 (`{name, message}`) |
+| `DELETE` | `/entries/:id` | 글 지우기 (`Authorization: Bearer <암호>`) |
+| `POST` | `/admin/check` | 암호가 맞는지만 확인 |
 
-### 3. GitHub 로그인 켜기 (삭제용)
+### 관리자 암호 바꾸기
 
-1. Firebase에서 **빌드 → Authentication → 시작하기 → 로그인 방법 → GitHub → 사용 설정**
-2. Firebase가 보여주는 콜백 URL(`https://<프로젝트>.firebaseapp.com/__/auth/handler`)을 복사합니다.
-3. GitHub **Settings → Developer settings → OAuth Apps → New OAuth App**
-   - Homepage URL: `https://teamlimryan.github.io/korean-patches/`
-   - Authorization callback URL: 방금 복사한 값
-4. 발급된 **Client ID / Client secret**을 Firebase의 GitHub 설정에 넣고 저장합니다.
-5. **Authentication → Settings → 승인된 도메인**에 `teamlimryan.github.io`를 추가합니다.
+```
+cd worker
+npx wrangler secret put ADMIN_TOKEN
+```
 
-### 4. 내 UID를 주인으로 등록
+암호는 저장소 어디에도 없고 Worker secret 으로만 존재합니다. 브라우저에는 탭을 닫으면 사라지는 `sessionStorage`에만 잠깐 남습니다.
 
-1. 사이트 방명록에서 **관리자 로그인**을 눌러 GitHub 계정으로 로그인합니다.
-2. 아직 주인이 아니므로 화면에 `이 계정의 UID: …` 가 뜹니다. 그 값을 복사합니다.
-3. 같은 값을 두 군데에 넣습니다.
-   - `assets/firebase-config.js`의 `OWNER_UID`
-   - `firestore.rules`의 `ownerUid()`
-4. 규칙은 Firebase 콘솔 규칙 탭에 다시 붙여넣어 게시하고, 설정 파일은 커밋해서 푸시합니다.
-5. 새로고침하면 각 글에 삭제 버튼이 생깁니다.
+### 서버 고치고 다시 올리기
+
+```
+cd worker
+npx wrangler deploy
+```
+
+스키마를 바꿨다면:
+
+```
+npx wrangler d1 execute limryan-guestbook --remote --file=schema.sql
+```
 
 ### 스팸 대응
 
-`firestore.rules`에서 `name`(1~20자), `message`(1~500자), `createdAt`(서버 시각) 세 필드만 받고 그 외 필드는 거부합니다. 화면에는 보이지 않는 봇 잡이 입력칸이 있고, 같은 브라우저에서 연속 작성은 30초 간격으로 제한합니다(`COOLDOWN_SECONDS`). 그래도 들어온 글은 로그인 후 삭제 버튼으로 지우면 됩니다.
+Worker에서 닉네임 20자, 내용 500자, 본문 8KB로 자르고 그 밖의 필드는 받지 않습니다. 화면에 보이지 않는 봇 잡이 입력칸이 있고, 같은 회선에서 연달아 넣는 것은 30초로 막습니다(`THROTTLE_SECONDS`). 이때 쓰는 값은 소금을 섞은 IP 해시라 원래 주소로 되돌릴 수 없고, 글과 연결되지도 않으며 하루가 지나면 지워집니다. 그래도 들어온 글은 관리자로 로그인해 지우면 됩니다.
 
 ## 배포
 
