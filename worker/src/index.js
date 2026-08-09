@@ -39,7 +39,8 @@ export default {
       if (del && request.method === 'DELETE') return await deleteEntry(del[1], request, env, cors);
 
       if (path === '/admin/check' && request.method === 'POST') {
-        if (!(await isAdmin(request, env))) return json({ error: 'unauthorized' }, 401, cors);
+        const check = await checkAdmin(request, env);
+        if (!check.ok) return adminError(check, cors);
         return json({ ok: true }, 200, cors);
       }
 
@@ -134,7 +135,8 @@ async function createEntry(request, env, cors) {
 /* ---------------- 지우기 ---------------- */
 
 async function deleteEntry(id, request, env, cors) {
-  if (!(await isAdmin(request, env))) return json({ error: 'unauthorized' }, 401, cors);
+  const check = await checkAdmin(request, env);
+  if (!check.ok) return adminError(check, cors);
 
   const res = await env.DB.prepare('DELETE FROM entries WHERE id = ?1').bind(id).run();
   const removed = res.meta && typeof res.meta.changes === 'number' ? res.meta.changes : 0;
@@ -145,17 +147,64 @@ async function deleteEntry(id, request, env, cors) {
 
 /* ---------------- 관리자 확인 ---------------- */
 
-async function isAdmin(request, env) {
+// 짧은 암호를 쓰더라도 마구 찔러 볼 수 없도록, 틀린 시도를 회선별로 센다.
+const AUTH_MAX_FAILS = 5;          // 이 횟수를 넘기면
+const AUTH_BLOCK_MS = 10 * 60_000; // 이만큼 막는다 (실패 기록의 유효 기간이기도 하다)
+
+/**
+ * @returns {{ok: boolean, blocked?: boolean, wait?: number}}
+ */
+async function checkAdmin(request, env) {
   const secret = env.ADMIN_TOKEN;
-  if (!secret) return false;
+  if (!secret) return { ok: false };
 
   const header = request.headers.get('Authorization') || '';
   const match = header.match(/^Bearer\s+(.+)$/i);
-  if (!match) return false;
+  if (!match) return { ok: false };
+
+  const who = await hashIp(request, env);
+  const now = Date.now();
+
+  // 이미 막혀 있으면 암호를 비교해 보지도 않는다.
+  let row = null;
+  if (who) {
+    row = await env.DB
+      .prepare('SELECT fails, seen FROM auth_fail WHERE who = ?1')
+      .bind('auth:' + who)
+      .first();
+    if (row && now - row.seen < AUTH_BLOCK_MS && row.fails >= AUTH_MAX_FAILS) {
+      return { ok: false, blocked: true, wait: Math.ceil((AUTH_BLOCK_MS - (now - row.seen)) / 1000) };
+    }
+  }
 
   // 길이 차이로 정답을 좁힐 수 없도록 해시를 비교한다.
-  const [a, b] = await Promise.all([sha256(match[1]), sha256(secret)]);
-  return timingSafeEqual(a, b);
+  const [given, real] = await Promise.all([sha256(match[1]), sha256(secret)]);
+  const ok = timingSafeEqual(given, real);
+
+  if (who) {
+    if (ok) {
+      await env.DB.prepare('DELETE FROM auth_fail WHERE who = ?1').bind('auth:' + who).run();
+    } else {
+      // 마지막 실패로부터 시간이 충분히 지났으면 처음부터 다시 센다.
+      const fresh = row && now - row.seen < AUTH_BLOCK_MS ? row.fails : 0;
+      await env.DB
+        .prepare(
+          'INSERT INTO auth_fail (who, fails, seen) VALUES (?1, ?2, ?3) ' +
+          'ON CONFLICT(who) DO UPDATE SET fails = excluded.fails, seen = excluded.seen'
+        )
+        .bind('auth:' + who, fresh + 1, now)
+        .run();
+    }
+  }
+
+  return { ok };
+}
+
+function adminError(check, cors) {
+  if (check.blocked) {
+    return json({ error: 'too_many_attempts', wait: check.wait }, 429, cors);
+  }
+  return json({ error: 'unauthorized' }, 401, cors);
 }
 
 /* ---------------- 도구 ---------------- */

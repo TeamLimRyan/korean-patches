@@ -79,7 +79,15 @@ cd worker
 npx wrangler secret put ADMIN_TOKEN
 ```
 
-암호는 저장소 어디에도 없고 Worker secret 으로만 존재합니다. 브라우저에는 탭을 닫으면 사라지는 `sessionStorage`에만 잠깐 남습니다.
+암호는 저장소 어디에도 없고 Worker secret 으로만 존재합니다. 브라우저에는 탭을 닫으면 사라지는 `sessionStorage`에만 잠깐 남습니다. 값을 바꾸면 반영까지 몇십 초 걸릴 수 있습니다.
+
+틀린 암호를 한 회선에서 5번 넣으면 그 회선은 10분 동안 막힙니다(`AUTH_MAX_FAILS`, `AUTH_BLOCK_MS`). 막혀 있는 동안에는 맞는 암호를 넣어도 통과되지 않고, 한 번 맞히면 실패 기록은 지워집니다. 짧은 암호를 쓰더라도 마구 찔러 볼 수 없게 하려는 장치입니다.
+
+실수로 스스로 막혔다면 이렇게 풉니다.
+
+```
+npx wrangler d1 execute limryan-guestbook --remote --command="DELETE FROM auth_fail;"
+```
 
 ### 서버 고치고 다시 올리기
 

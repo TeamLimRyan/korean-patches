@@ -21,3 +21,12 @@ CREATE TABLE IF NOT EXISTS throttle (
   who  TEXT    PRIMARY KEY,
   last INTEGER NOT NULL
 );
+
+-- 관리자 암호 무차별 대입 차단.
+-- 틀린 시도를 세다가 일정 횟수를 넘기면 그 회선은 잠시 막는다.
+-- 여기 남는 값도 되돌릴 수 없는 해시이며 맞히면 바로 지워진다.
+CREATE TABLE IF NOT EXISTS auth_fail (
+  who   TEXT    PRIMARY KEY,
+  fails INTEGER NOT NULL,
+  seen  INTEGER NOT NULL
+);
