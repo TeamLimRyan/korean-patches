@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>임라이언 번역방 · 한국어 패치</title>
+<meta name="description" content="태합입지전 V DX, 두근두근 메모리얼 forever with you 이모셔널 비공식 한국어 패치 — by 임라이언" />
+<link rel="icon" type="image/png" href="./favicon.png" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="임라이언 번역방 · 한국어 패치" />
+<meta property="og:description" content="태합입지전 V DX, 두근두근 메모리얼 이모셔널 비공식 한국어 패치" />
+<meta property="og:image" content="./assets/hero.jpg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --bg:        #16120d;
+    --bg-alt:    #1f1a13;
+    --card:      #2a241b;
+    --card-hi:   #322a1f;
+    --line:      #4a3f2e;
+    --dim:       #9a8a68;
+    --body:      #c9b48c;
+    --body-hi:   #ddceae;
+    --gold:      #b89b63;
+    --cream:     #e8d5a0;
+
+    --serif: 'Gowun Batang', 'Nanum Myeongjo', 'Apple SD Gothic Neo', serif;
+    --sans:  'Noto Sans KR', -apple-system, 'Segoe UI', 'Malgun Gothic', sans-serif;
+    --mono:  ui-monospace, SFMono-Regular, Consolas, monospace;
+
+    --wrap: 940px;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--body);
+    font-family:var(--sans);
+    font-size:15px;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ color:inherit; }
+  img{ display:block; max-width:100%; }
+
+  .wrap{ width:100%; max-width:var(--wrap); margin:0 auto; padding:0 24px; }
+
+  /* ---------- 상단 바 ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    background:rgba(22,18,13,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:12px; height:56px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:9px;
+    font-family:var(--serif); font-weight:700;
+    font-size:16px; color:var(--cream);
+    text-decoration:none; white-space:nowrap;
+  }
+  .brand .mark{
+    width:24px; height:24px; flex:0 0 24px;
+    border-radius:50%;
+    background:var(--card); border:1px solid var(--gold);
+    object-fit:cover;
+  }
+  .nav{ display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
+  .nav a{
+    font-size:13px; letter-spacing:.02em;
+    padding:5px 12px; border-radius:4px;
+    border:1px solid var(--line);
+    color:var(--body); text-decoration:none;
+    transition:background .15s, border-color .15s, color .15s;
+  }
+  .nav a:hover{ background:var(--card); border-color:var(--gold); color:var(--cream); }
+  .nav a.on{ background:var(--cream); border-color:var(--cream); color:#221c13; font-weight:500; }
+
+  /* ---------- 공지 ---------- */
+  .notice{
+    background:var(--bg-alt);
+    border-bottom:1px solid var(--line);
+    font-size:13px; color:var(--body-hi);
+  }
+  .notice .wrap{
+    display:flex; align-items:center; gap:10px;
+    padding-top:8px; padding-bottom:8px;
+  }
+  .notice .tag{
+    flex:0 0 auto;
+    font-size:11px; letter-spacing:.1em;
+    padding:2px 8px; border-radius:3px;
+    background:var(--cream); color:#221c13; font-weight:700;
+  }
+  .notice p{ margin:0; flex:1 1 auto; }
+  .notice button{
+    flex:0 0 auto;
+    background:none; border:none; cursor:pointer;
+    color:var(--dim); font-size:16px; line-height:1; padding:4px;
+  }
+  .notice button:hover{ color:var(--cream); }
+
+  /* ---------- 히어로 ---------- */
+  .hero{ padding:22px 0 0; }
+  .hero-frame{
+    position:relative;
+    max-width:1120px; margin:0 auto;
+    border:1px solid var(--line);
+    background:#0f0c08;
+    overflow:hidden;
+  }
+  .hero-frame::after{
+    content:""; position:absolute; inset:8px;
+    border:1px solid rgba(184,155,99,.30);
+    pointer-events:none;
+  }
+  .hero-frame img{
+    width:100%; aspect-ratio:3/2; object-fit:cover;
+    opacity:.96;
+  }
+  .hero-cap{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:0 24px 8%;
+    text-align:center;
+    background:linear-gradient(to top, rgba(15,12,8,.92) 12%, rgba(15,12,8,.55) 45%, transparent 78%);
+  }
+  .hero-cap .sm{
+    font-family:var(--serif);
+    font-size:clamp(13px,2.2vw,19px);
+    line-height:1.5;
+    color:var(--body-hi); margin:0 0 6px;
+    text-shadow:0 1px 10px rgba(0,0,0,.9), 0 0 22px rgba(0,0,0,.7);
+  }
+  .hero-cap .lg{
+    font-family:var(--serif); font-weight:700;
+    font-size:clamp(30px,6.5vw,62px);
+    line-height:1.15; letter-spacing:.06em;
+    color:var(--cream);
+    margin:0;
+    text-shadow:0 2px 18px rgba(0,0,0,.8);
+  }
+  .hero-cap .rule{
+    display:flex; align-items:center; justify-content:center; gap:12px;
+    margin-top:6px;
+  }
+  .hero-cap .rule span{
+    display:block; height:1px; width:clamp(28px,9vw,86px);
+    background:linear-gradient(to right, transparent, var(--gold));
+  }
+  .hero-cap .rule span:last-child{
+    background:linear-gradient(to left, transparent, var(--gold));
+  }
+
+  .hero-sub{
+    text-align:center;
+    font-size:11px; letter-spacing:.36em;
+    color:var(--dim);
+    margin:18px 0 14px;
+    text-transform:uppercase;
+  }
+
+  .actions{
+    display:flex; flex-wrap:wrap; gap:8px;
+    justify-content:center;
+    padding-bottom:56px;
+  }
+  .btn{
+    font-family:var(--sans); font-size:13px;
+    padding:8px 18px; border-radius:4px;
+    border:1px solid var(--line);
+    background:var(--card); color:var(--body-hi);
+    text-decoration:none; white-space:nowrap;
+    transition:background .15s, border-color .15s, color .15s;
+  }
+  .btn:hover{ border-color:var(--gold); color:var(--cream); background:var(--card-hi); }
+  .btn.primary{
+    background:var(--cream); border-color:var(--cream);
+    color:#221c13; font-weight:700;
+  }
+  .btn.primary:hover{ background:#f2e2b6; border-color:#f2e2b6; color:#221c13; }
+
+  /* ---------- 섹션 ---------- */
+  section.band{ padding:64px 0; border-top:1px solid rgba(74,63,46,.5); }
+  section.band.alt{ background:var(--bg-alt); }
+
+  .eyebrow{
+    font-size:10px; letter-spacing:.38em;
+    color:var(--dim); text-transform:uppercase;
+    margin:0 0 10px;
+  }
+  h2.head{
+    font-family:var(--serif); font-weight:700;
+    font-size:26px; letter-spacing:.06em;
+    color:var(--cream);
+    margin:0 0 24px;
+  }
+  .lede{ margin:0; max-width:60ch; color:var(--body); }
+  .lede + .lede{ margin-top:14px; }
+
+  /* ---------- 패치 카드 ---------- */
+  .cards{ display:flex; flex-direction:column; gap:12px; }
+  .card{
+    border:1px solid var(--line);
+    background:var(--card);
+    border-radius:6px;
+    padding:18px 20px;
+    transition:border-color .15s, background .15s;
+  }
+  .card:hover{ border-color:var(--gold); background:var(--card-hi); }
+  .card-top{
+    display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+  }
+  .card-txt{ flex:1 1 240px; min-width:0; }
+  .card h3{
+    font-family:var(--serif); font-weight:700;
+    font-size:17px; color:var(--cream);
+    margin:0 0 3px; line-height:1.4;
+  }
+  .card .latin{
+    font-size:10px; letter-spacing:.2em;
+    color:var(--gold); text-transform:uppercase;
+    margin:0 0 5px;
+  }
+  .card .meta{
+    font-size:12px; color:var(--dim); margin:0;
+    font-family:var(--mono); letter-spacing:.01em;
+  }
+  .card-act{ display:flex; flex-direction:column; gap:6px; flex:0 0 auto; }
+  .card-act .btn{ text-align:center; }
+
+  details.more{ margin-top:16px; border-top:1px solid rgba(74,63,46,.6); padding-top:12px; }
+  details.more summary{
+    cursor:pointer; font-size:12px; color:var(--gold);
+    list-style:none; user-select:none;
+    display:inline-flex; align-items:center; gap:6px;
+  }
+  details.more summary::-webkit-details-marker{ display:none; }
+  details.more summary::before{ content:"＋"; font-size:11px; }
+  details.more[open] summary::before{ content:"－"; }
+  details.more summary:hover{ color:var(--cream); }
+  .more-body{ font-size:13px; padding-top:10px; }
+  .more-body h4{
+    font-size:12px; letter-spacing:.14em; color:var(--body-hi);
+    margin:14px 0 6px; text-transform:uppercase;
+  }
+  .more-body h4:first-child{ margin-top:0; }
+  .more-body ol, .more-body ul{ margin:0; padding-left:20px; }
+  .more-body li{ margin:3px 0; }
+  .more-body code{
+    font-family:var(--mono); font-size:11.5px;
+    background:rgba(0,0,0,.35); border:1px solid rgba(74,63,46,.7);
+    border-radius:3px; padding:1px 5px; color:var(--body-hi);
+    overflow-wrap:anywhere;
+  }
+  .warn{
+    border-left:2px solid var(--gold);
+    background:rgba(184,155,99,.07);
+    padding:10px 14px; margin:12px 0;
+    color:var(--body-hi);
+  }
+  .warn strong{ color:var(--cream); }
+  .hash{
+    display:block; font-family:var(--mono); font-size:11px;
+    color:var(--dim); overflow-x:auto; white-space:nowrap;
+    padding:8px 10px; margin-top:4px;
+    background:rgba(0,0,0,.35); border:1px solid rgba(74,63,46,.7); border-radius:3px;
+  }
+  .foot-note{ font-size:12px; color:var(--dim); margin:18px 0 0; }
+
+  /* ---------- 진행 이력 ---------- */
+  .timeline{ list-style:none; margin:0; padding:0 0 0 22px; position:relative; }
+  .timeline::before{
+    content:""; position:absolute; left:4px; top:6px; bottom:6px;
+    width:1px; background:var(--line);
+  }
+  .timeline li{ position:relative; padding-bottom:22px; }
+  .timeline li::before{
+    content:""; position:absolute; left:-22px; top:7px;
+    width:9px; height:9px; border-radius:50%;
+    background:var(--bg); border:1px solid var(--gold);
+  }
+  .timeline li:first-child::before{ background:var(--cream); border-color:var(--cream); }
+  .timeline .date{
+    font-family:var(--mono); font-size:13px;
+    color:var(--body-hi); letter-spacing:.04em;
+  }
+  .timeline ul{ list-style:none; margin:4px 0 0; padding:0; }
+  .timeline ul li{
+    padding:0 0 0 10px; font-size:13px; color:var(--body);
+    position:relative;
+  }
+  .timeline ul li::before{
+    content:"·"; position:absolute; left:0; top:0;
+    background:none; border:none; width:auto; height:auto;
+    color:var(--gold);
+  }
+
+  /* ---------- 푸터 ---------- */
+  .footer-art{ position:relative; max-width:1120px; margin:0 auto; border-top:1px solid var(--line); }
+  .footer-art img{ width:100%; aspect-ratio:3/2; object-fit:cover; opacity:.9; }
+  .footer-art .word{
+    position:absolute; left:0; right:0; bottom:10%;
+    text-align:center;
+    font-family:var(--serif); font-weight:700;
+    font-size:clamp(22px,5.4vw,50px);
+    letter-spacing:.34em; text-indent:.34em;
+    color:var(--cream);
+    text-shadow:0 2px 20px rgba(0,0,0,.85);
+  }
+  footer.site{ padding:30px 0 46px; text-align:center; }
+  footer.site p{ margin:0 0 4px; font-size:12px; color:var(--dim); }
+  footer.site a{ color:var(--gold); text-decoration:none; }
+  footer.site a:hover{ color:var(--cream); text-decoration:underline; }
+
+  @media (max-width:640px){
+    .topbar .wrap{ height:auto; padding-top:10px; padding-bottom:10px; flex-wrap:wrap; }
+    .nav a{ padding:5px 9px; font-size:12px; }
+    .card-act{ flex-direction:row; width:100%; }
+    .card-act .btn{ flex:1 1 0; }
+    section.band{ padding:48px 0; }
+    .hero{ padding-top:14px; }
+    .hero-cap{ padding-bottom:11%; }
+    .hero-frame img{ aspect-ratio:4/3; }
+    .footer-art img{ aspect-ratio:4/3; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{ scroll-behavior:auto; }
+    *{ transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <img class="mark" src="./favicon.png" alt="" />
+      임라이언 번역방
+    </a>
+    <nav class="nav">
+      <a class="on" href="#download">패치</a>
+      <a href="#about">소개</a>
+      <a href="#progress">진행 이력</a>
+      <a href="https://github.com/TeamLimRyan" target="_blank" rel="noopener">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<div class="notice" id="notice">
+  <div class="wrap">
+    <span class="tag">공지</span>
+    <p>태합입지전 V DX 한국어 패치 <strong>v1.02</strong> 배포 — v1.01 사용자는 반드시 <strong>원본 복원</strong> 후 적용하세요.</p>
+    <button type="button" aria-label="공지 닫기" onclick="document.getElementById('notice').remove()">×</button>
+  </div>
+</div>
+
+<main id="top">
+
+  <!-- 히어로 -->
+  <section class="hero">
+    <div class="hero-frame">
+      <img src="./assets/hero.jpg" alt="등불이 켜진 밤의 작업방에서 원고를 살펴보는 고양이" />
+      <div class="hero-cap">
+        <p class="sm">한국어 패치 by</p>
+        <p class="lg">임라이언</p>
+        <div class="rule"><span></span><span></span></div>
+      </div>
+    </div>
+    <div class="wrap">
+      <p class="hero-sub">Team LimRyan · Korean Localization</p>
+      <div class="actions">
+        <a class="btn primary" href="#download">패치 받기</a>
+        <a class="btn" href="#about">소개</a>
+        <a class="btn" href="#progress">진행 이력</a>
+        <a class="btn" href="https://github.com/TeamLimRyan" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 소개 -->
+  <section class="band" id="about">
+    <div class="wrap">
+      <p class="eyebrow">About</p>
+      <h2 class="head">이 번역방에 대하여</h2>
+      <p class="lede">
+        임라이언이 틈틈이 만드는 비공식 한국어 패치를 모아 두는 자리입니다.
+        텍스트와 글꼴은 물론 UI 이미지, 한글 이름 입력, 한국어 레이아웃 보정까지 손을 대며,
+        원본 게임의 동작을 해치지 않는 선에서 최대한 자연스럽게 다듬는 것을 목표로 합니다.
+      </p>
+      <p class="lede">
+        모두 비영리 개인 작업이고, 각 게임과 상표·원본 데이터의 권리는 해당 권리자에게 있습니다.
+        패치에는 원본 게임 파일이 포함되어 있지 않으므로 정품을 보유한 상태에서만 사용해 주세요.
+        공식 배포본은 아래 GitHub Releases 링크에서만 제공합니다.
+      </p>
+    </div>
+  </section>
+
+  <!-- 다운로드 -->
+  <section class="band alt" id="download">
+    <div class="wrap">
+      <p class="eyebrow">Download</p>
+      <h2 class="head">패치 다운로드</h2>
+
+      <div class="cards">
+
+        <!-- 태합입지전 V DX -->
+        <article class="card">
+          <div class="card-top">
+            <div class="card-txt">
+              <h3>태합입지전 V DX 한국어 패치</h3>
+              <p class="latin">Taiko Risshiden V DX · Windows / Steam</p>
+              <p class="meta">v1.02 · 2026-07-21 · 약 163MB</p>
+            </div>
+            <div class="card-act">
+              <a class="btn primary"
+                 href="https://github.com/TeamLimRyan/TAIKO_RISSHIDEN_V_DX_KOREAN_LOCALIZATION_RELEASE/releases/download/v1.02/Taiko5DX_Korean_Patcher_v1.02.zip">↓ 다운로드</a>
+              <a class="btn"
+                 href="https://github.com/TeamLimRyan/TAIKO_RISSHIDEN_V_DX_KOREAN_LOCALIZATION_RELEASE"
+                 target="_blank" rel="noopener">자세히 ↗</a>
+            </div>
+          </div>
+
+          <details class="more">
+            <summary>지원 환경과 설치 방법</summary>
+            <div class="more-body">
+
+              <div class="warn">
+                <strong>v1.01 사용자는 먼저 원본 복원부터.</strong>
+                v1.01이 적용된 폴더에 v1.02를 바로 적용할 수 없습니다.
+                가지고 있는 v1.01 패처에서 <strong>원본 복원</strong>을 실행한 뒤 v1.02를 적용하세요.
+                복원이 거부되면 게임 폴더에 <code>dinput8.dll</code>이 남아 있는지 확인해 삭제하고,
+                Steam의 게임 파일 무결성 검사로 원본을 복구한 뒤 적용하면 됩니다.
+              </div>
+
+              <h4>지원 환경</h4>
+              <ul>
+                <li>Steam 정식판 <code>태합입지전 V DX</code> (App ID <code>1842810</code>)</li>
+                <li>게임 버전 <code>Ver.1.2.1.0</code> / public build <code>9163702</code></li>
+                <li>원본 <code>Taiko5DX.exe</code> SHA-256 <code>10C69BAB…B565A2</code> 와 일치하는 설치본</li>
+                <li>Windows x64 · 별도 .NET 설치 불필요 (단일 EXE 패처)</li>
+              </ul>
+
+              <h4>설치</h4>
+              <ol>
+                <li>게임이 실행 중이면 완전히 종료합니다.</li>
+                <li>ZIP을 별도 폴더에 <strong>모두</strong> 압축 해제합니다. ZIP 안에서 EXE를 직접 실행하지 마세요.</li>
+                <li><code>Taiko5DX_Korean_Patcher.exe</code>를 실행합니다.</li>
+                <li><code>Taiko5DX.exe</code>와 <code>data</code> 폴더가 함께 있는 게임 최상위 폴더를 선택합니다.</li>
+                <li>“지원되는 원본 게임 확인 완료”가 표시되는지 확인합니다.</li>
+                <li><strong>한글 패치 적용</strong>을 누르고 완료 메시지를 기다립니다.</li>
+              </ol>
+
+              <h4>복원</h4>
+              <ul>
+                <li>원본은 게임 폴더 밖 <code>%LOCALAPPDATA%\Taiko5DXKoreanPatcher\Backups</code>에 자동 백업됩니다.</li>
+                <li>같은 패처에서 해당 게임 폴더를 선택하고 <strong>원본 복원</strong>을 누르면 되돌릴 수 있습니다.</li>
+                <li>“중단된 작업 복구 필요”가 뜨면 게임을 실행하지 말고 <strong>중단 작업 복구</strong>를 먼저 누르세요.</li>
+              </ul>
+
+              <h4>파일 무결성</h4>
+              <p style="margin:0 0 4px">
+                <code>Taiko5DX_Korean_Patcher_v1.02.zip</code> SHA-256
+              </p>
+              <code class="hash">df1b62de95e992369e9686c9731d814e7a7e4634888f610430635429e24f7cec</code>
+              <p style="margin:8px 0 0; color:var(--dim)">
+                PowerShell에서 <code>Get-FileHash .\Taiko5DX_Korean_Patcher_v1.02.zip -Algorithm SHA256</code> 으로 확인할 수 있습니다.
+              </p>
+
+            </div>
+          </details>
+        </article>
+
+        <!-- 두근두근 메모리얼 -->
+        <article class="card">
+          <div class="card-top">
+            <div class="card-txt">
+              <h3>두근두근 메모리얼 forever with you 이모셔널 한국어 패치</h3>
+              <p class="latin">Tokimeki Memorial Emotional · Nintendo Switch</p>
+              <p class="meta">1.0.0-ko-20260801 · 2026-08-01 · 약 66MB</p>
+            </div>
+            <div class="card-act">
+              <a class="btn primary"
+                 href="https://github.com/TeamLimRyan/TOKIMEMO_EMOTIONAL_KOREAN_LOCALIZATION_RELEASE/releases/download/v1.0.0-ko-20260801/tokimemo-emotional-ko-text-patch-1.0.0-ko-20260801.zip">↓ 다운로드</a>
+              <a class="btn"
+                 href="https://github.com/TeamLimRyan/TOKIMEMO_EMOTIONAL_KOREAN_LOCALIZATION_RELEASE"
+                 target="_blank" rel="noopener">자세히 ↗</a>
+            </div>
+          </div>
+
+          <details class="more">
+            <summary>지원 환경과 설치 방법</summary>
+            <div class="more-body">
+
+              <h4>지원 환경</h4>
+              <ul>
+                <li>일본판(JP) <code>v0 / 1.0.0</code> 전용</li>
+                <li>Base Title ID <code>01005F201D534000</code></li>
+                <li>DLC1 Title ID <code>01005F201D535001</code></li>
+                <li>Build ID <code>841505539F3C3A2C…</code></li>
+              </ul>
+
+              <h4>포함 범위</h4>
+              <ul>
+                <li>텍스트 데이터 한글화, 한글 폰트 적용</li>
+                <li>문자열 기반 UI 한글화, 한글 이름 입력 지원</li>
+                <li>선정·승인된 이미지 에셋 한글화 (선정하지 않은 이미지는 제외)</li>
+                <li>Atmosphère LayeredFS 및 에뮬레이터용 모드 구조 제공</li>
+              </ul>
+
+              <h4>설치</h4>
+              <ol>
+                <li>ZIP을 내려받아 압축을 풉니다.</li>
+                <li><strong>Atmosphère</strong> — <code>patch/atmosphere/</code> 안의 내용을 SD 카드의 <code>atmosphere/</code>에 병합합니다.</li>
+                <li><strong>에뮬레이터</strong> — <code>patch/emulator_mod/01005F201D534000/TokimemoEmotionalKO/</code>를 Base 타이틀의 모드 디렉터리에 설치합니다.
+                    DLC1을 보유했다면 <code>…/01005F201D535001/TokimemoEmotionalKO/</code>도 DLC1 모드 디렉터리에 설치합니다.</li>
+                <li>일본판 <code>v0 / 1.0.0</code>을 실행합니다.</li>
+              </ol>
+
+              <p style="margin:12px 0 0">
+                변경 파일만 제공합니다. XCI, NSP, NCA, 암호화 키, 원본 실행 파일과 세이브 데이터는 포함하지 않습니다.
+                2026-08-01 실기기 설치·정상 구동을 확인했습니다.
+              </p>
+
+              <h4>파일 무결성</h4>
+              <code class="hash">dc424207cdf623811828525e7fdbbb00383bf5320946a21dbbb1cb3599d7d89e</code>
+
+            </div>
+          </details>
+        </article>
+
+      </div>
+
+      <p class="foot-note">
+        설치 전 원본 게임과 세이브 데이터의 백업을 권장합니다.
+        공식 배포본은 각 저장소의 GitHub Releases에서만 제공하며, 다른 경로에서 받은 파일은 보장하지 않습니다.
+      </p>
+    </div>
+  </section>
+
+  <!-- 진행 이력 -->
+  <section class="band" id="progress">
+    <div class="wrap">
+      <p class="eyebrow">Progress</p>
+      <h2 class="head">진행 이력</h2>
+
+      <ol class="timeline">
+        <li>
+          <span class="date">2026-08-01</span>
+          <ul>
+            <li>두근두근 메모리얼 이모셔널 한국어 패치 <strong>1.0.0-ko-20260801</strong> 최초 공개</li>
+            <li>실기기 설치 및 정상 구동 확인, 패치 ZIP 무결성 검증 완료</li>
+          </ul>
+        </li>
+        <li>
+          <span class="date">2026-07-21</span>
+          <ul>
+            <li>태합입지전 V DX <strong>v1.02</strong> 배포 — 런타임 로더의 스택 오버플로 결함 수정, 예외 가드와 진단 로그 추가</li>
+            <li>태합입지전 V DX <strong>v1.01</strong> 배포 — Steam 정식 <code>Ver.1.2.1.0</code> / build <code>9163702</code> 대응, 공식 EXE를 수정하지 않는 방식으로 전환</li>
+          </ul>
+        </li>
+        <li>
+          <span class="date">2026-07-20</span>
+          <ul>
+            <li>태합입지전 V DX <strong>v1.0.0</strong> 공개 — Steam 정식 빌드와 기준본이 달라 배포 중단</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+</main>
+
+<div class="footer-art">
+  <img src="./assets/footer.jpg" alt="책 더미 위에서 잠든 고양이" />
+  <p class="word">LIMRYAN</p>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <p>임라이언 번역방 · 비공식 팬 번역 프로젝트</p>
+    <p>
+      오류 제보는 각 저장소의
+      <a href="https://github.com/TeamLimRyan/TAIKO_RISSHIDEN_V_DX_KOREAN_LOCALIZATION_RELEASE/issues" target="_blank" rel="noopener">태합입지전 Issues</a> ·
+      <a href="https://github.com/TeamLimRyan/TOKIMEMO_EMOTIONAL_KOREAN_LOCALIZATION_RELEASE/issues" target="_blank" rel="noopener">두근두근 메모리얼 Issues</a>
+    </p>
+    <p>각 게임과 상표·원본 데이터의 권리는 해당 권리자에게 있습니다. 이 사이트는 어떠한 방문자 정보도 수집하지 않습니다.</p>
+  </div>
+</footer>
+
+<script>
+  // 현재 보고 있는 섹션을 상단 네비에 표시
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.nav a[href^="#"]'));
+    var targets = links
+      .map(function (a) { return { link: a, el: document.querySelector(a.getAttribute('href')) }; })
+      .filter(function (t) { return t.el; });
+    if (!targets.length || !('IntersectionObserver' in window)) return;
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        links.forEach(function (a) { a.classList.remove('on'); });
+        var hit = targets.filter(function (t) { return t.el === e.target; })[0];
+        if (hit) hit.link.classList.add('on');
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+
+    targets.forEach(function (t) { io.observe(t.el); });
+  })();
+</script>
+
+</body>
+</html>
