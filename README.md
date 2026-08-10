@@ -8,11 +8,14 @@
 
 | 패치 | 최신 버전 | 저장소 |
 |---|---|---|
-| 요괴워치 3 스키야키 한국어 패치 | v0.1.0 | [YW3_SUKIYAKI_KOREAN_LOCALIZATION_RELEASE](https://github.com/TeamLimRyan/YW3_SUKIYAKI_KOREAN_LOCALIZATION_RELEASE) |
+| 테일즈 오브 더 월드 ~서머너즈 리니지~ 한국어 패치 | v1.0.0 | [TALES_OF_THE_WORLD_SUMMONERS_LINEAGE_KOREAN_LOCALIZATION_RELEASE](https://github.com/TeamLimRyan/TALES_OF_THE_WORLD_SUMMONERS_LINEAGE_KOREAN_LOCALIZATION_RELEASE) |
+| 요괴워치 3 스키야키 한국어 패치 | v0.4.0 / v0.1.0 | [YW3_SUKIYAKI_KOREAN_LOCALIZATION_RELEASE](https://github.com/TeamLimRyan/YW3_SUKIYAKI_KOREAN_LOCALIZATION_RELEASE) |
 | 두근두근 메모리얼 forever with you 이모셔널 한국어 패치 | 1.0.0-ko-20260801 | [TOKIMEMO_EMOTIONAL_KOREAN_LOCALIZATION_RELEASE](https://github.com/TeamLimRyan/TOKIMEMO_EMOTIONAL_KOREAN_LOCALIZATION_RELEASE) |
 | 태합입지전 V DX 한국어 패치 | v1.02 | [TAIKO_RISSHIDEN_V_DX_KOREAN_LOCALIZATION_RELEASE](https://github.com/TeamLimRyan/TAIKO_RISSHIDEN_V_DX_KOREAN_LOCALIZATION_RELEASE) |
 
 패치 파일 자체는 이 저장소에 두지 않습니다. 각 패치 저장소의 GitHub Releases 자산으로 직접 연결합니다.
+
+요괴워치 3은 두 판이 대상 게임 데이터 버전이 달라 함께 게시합니다. `v0.4.0`은 게임 데이터 `v0.4.0`용이고 이미지는 원본을 유지하며, `v0.1.0`은 게임 데이터 `v0.2.0`용이고 이미지 1,685개가 한글화되어 있습니다.
 
 ## 구성
 

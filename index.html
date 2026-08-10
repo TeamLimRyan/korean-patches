@@ -4,12 +4,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>임라이언 번역방 · 한국어 패치</title>
-<meta name="description" content="요괴워치 3 스키야키, 두근두근 메모리얼 이모셔널, 태합입지전 V DX 비공식 한국어 패치 — by 임라이언" />
+<meta name="description" content="테일즈 오브 더 월드 서머너즈 리니지, 요괴워치 3 스키야키, 두근두근 메모리얼 이모셔널, 태합입지전 V DX 비공식 한국어 패치 — by 임라이언" />
 <link rel="icon" type="image/png" href="./favicon.png" />
 
 <meta property="og:type" content="website" />
 <meta property="og:title" content="임라이언 번역방 · 한국어 패치" />
-<meta property="og:description" content="요괴워치 3 스키야키, 두근두근 메모리얼 이모셔널, 태합입지전 V DX 비공식 한국어 패치" />
+<meta property="og:description" content="테일즈 오브 더 월드 서머너즈 리니지, 요괴워치 3 스키야키, 두근두근 메모리얼 이모셔널, 태합입지전 V DX 비공식 한국어 패치" />
 <meta property="og:image" content="./assets/hero.jpg" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -468,7 +468,7 @@
 <div class="notice" id="notice">
   <div class="wrap">
     <span class="tag">공지</span>
-    <p>요괴워치 3 스키야키 한국어 패치 <strong>v0.1.0</strong> 공개 — 남은 이미지 식자를 도와주실 분을 찾습니다.</p>
+    <p>테일즈 오브 더 월드 ~서머너즈 리니지~ <strong>v1.0.0</strong> 공개 · 요괴워치 3 스키야키 <strong>v0.4.0</strong> 배포 — 게임 데이터 버전에 맞는 쪽을 받으세요.</p>
     <button type="button" aria-label="공지 닫기" onclick="document.getElementById('notice').remove()">×</button>
   </div>
 </div>
@@ -525,20 +525,19 @@
 
       <div class="cards">
 
-        <!-- 요괴워치 3 스키야키 -->
+        <!-- 테일즈 오브 더 월드 -->
         <article class="card">
           <div class="card-top">
             <div class="card-txt">
-              <h3>요괴워치 3 스키야키 한국어 패치</h3>
-              <p class="latin">Yo-kai Watch 3 Sukiyaki &middot; Nintendo 3DS</p>
-              <p class="meta">v0.1.0 &middot; 2026-08-09 &middot; 약 47MB</p>
+              <h3>테일즈 오브 더 월드 ~서머너즈 리니지~ 한국어 패치</h3>
+              <p class="latin">Tales of the World: Summoner&rsquo;s Lineage &middot; Game Boy Advance</p>
+              <p class="meta">v1.0.0 &middot; 2026-08-10 &middot; 약 232KB (xdelta)</p>
             </div>
             <div class="card-act">
               <a class="btn primary"
-                 href="https://github.com/TeamLimRyan/YW3_SUKIYAKI_KOREAN_LOCALIZATION_RELEASE/releases/download/v0.1.0/YW3S_Korean_Patch_v0.1.0.zip">↓ 다운로드</a>
+                 href="https://github.com/TeamLimRyan/TALES_OF_THE_WORLD_SUMMONERS_LINEAGE_KOREAN_LOCALIZATION_RELEASE/releases/download/v1.0.0/Tales_of_the_World_Summoners_Lineage_KO.xdelta">↓ 다운로드</a>
               <a class="btn"
-                 href="https://github.com/TeamLimRyan/YW3_SUKIYAKI_KOREAN_LOCALIZATION_RELEASE"
-                 target="_blank" rel="noopener">자세히 ↗</a>
+                 href="https://github.com/TeamLimRyan/TALES_OF_THE_WORLD_SUMMONERS_LINEAGE_KOREAN_LOCALIZATION_RELEASE" target="_blank" rel="noopener">자세히 ↗</a>
             </div>
           </div>
 
@@ -546,10 +545,78 @@
             <summary>지원 환경과 설치 방법</summary>
             <div class="more-body">
 
+              <h4>지원 환경</h4>
+              <ul>
+                <li>게임보이 어드밴스 일본판 · 게임 코드 <code>A9PJ</code></li>
+                <li>원본 ROM 크기 <code>8,388,608</code> 바이트</li>
+                <li>원본 SHA-256 <code>b41c293f…6cfdd3</code></li>
+              </ul>
+              <p style="margin:8px 0 0">
+                파일명이나 확장자가 같아도 SHA-256이 다르면 대상이 아닙니다.
+                트림·헤더 추가·다른 리비전·다른 패치가 적용된 ROM에는 쓰지 마세요.
+              </p>
+
+              <h4>반영 범위</h4>
+              <ul>
+                <li>원문 텍스트 5,822행 번역</li>
+                <li>캐릭터·클래스·스킬·아이템 마스터 데이터 이름 필드 1,209개</li>
+                <li>승인된 이미지 70개 한글화</li>
+                <li>현대 한글 완성형 11,172자 글리프, 조합식 한글 이름 입력과 55키 자모 키보드</li>
+                <li>mGBA에서 부팅·메뉴·이름 입력·초반 대사 확인</li>
+              </ul>
+
+              <h4>설치</h4>
+              <p style="margin:0 0 6px">Python 3과 <code>xdelta3</code>가 있으면 저장소 스크립트로 확인·적용·검증을 한 번에 할 수 있습니다.</p>
+              <ol>
+                <li>정품 일본판 ROM을 직접 준비합니다.</li>
+                <li><code>Tales_of_the_World_Summoners_Lineage_KO.xdelta</code>를 내려받습니다.</li>
+                <li><code>python scripts/apply_patch.py "Tales of the World - Summoner's Lineage (Japan).gba"</code></li>
+                <li>직접 하려면 <code>xdelta3 -d -s &lt;원본.gba&gt; &lt;패치.xdelta&gt; summoners_lineage_ko.gba</code></li>
+              </ol>
+
+              <h4>파일 무결성</h4>
+              <p style="margin:0 0 4px">패치 <code>.xdelta</code> SHA-256</p>
+              <code class="hash">550aa8ac8f176171ec524825f9fe6c2a19f0a3237ae78c7edc0a62f57157ba11</code>
+              <p style="margin:8px 0 4px">적용 결과 ROM SHA-256 (<code>8,937,092</code> 바이트)</p>
+              <code class="hash">43c315b28b54c944aa862c838d54c464c4c66bdaa1214ce739113ba6b8860be4</code>
+              <p style="margin:8px 0 0; color:var(--ink-soft)">
+                원본 ROM, 완성 ROM, BIOS, 세이브 데이터는 배포하지 않습니다.
+              </p>
+
+            </div>
+          </details>
+        </article>
+
+        <!-- 요괴워치 3 스키야키 -->
+        <article class="card">
+          <div class="card-top">
+            <div class="card-txt">
+              <h3>요괴워치 3 스키야키 한국어 패치</h3>
+              <p class="latin">Yo-kai Watch 3 Sukiyaki &middot; Nintendo 3DS</p>
+              <p class="meta">v0.4.0 &middot; 2026-08-10 &middot; 약 46MB &nbsp;|&nbsp; v0.1.0 &middot; 약 47MB</p>
+            </div>
+            <div class="card-act">
+              <a class="btn primary"
+                 href="https://github.com/TeamLimRyan/YW3_SUKIYAKI_KOREAN_LOCALIZATION_RELEASE/releases/download/v0.4.0/YW3S_Korean_Patch_v0.4.0.zip">↓ v0.4.0 다운로드</a>
+              <a class="btn"
+                 href="https://github.com/TeamLimRyan/YW3_SUKIYAKI_KOREAN_LOCALIZATION_RELEASE" target="_blank" rel="noopener">자세히 ↗</a>
+            </div>
+          </div>
+
+          <details class="more">
+            <summary>어느 쪽을 받아야 하나 · 설치 방법</summary>
+            <div class="more-body">
+
               <div class="warn">
-                <strong>아직 검수가 끝나지 않은 첫 공개판입니다.</strong>
-                텍스트는 132,357개 전부 번역했지만, 이미지는 1,861개 중 1,685개(90.5%)만 반영했고
-                남은 176개는 원본 그대로 나옵니다.
+                <strong>두 판은 대상 게임 데이터 버전이 다릅니다. 최신판이 무조건 좋은 것이 아닙니다.</strong>
+                가지고 있는 게임 데이터에 맞춰 고르세요.
+                <ul style="margin:8px 0 0; padding-left:20px">
+                  <li><strong>v0.4.0</strong> — 게임 데이터 <code>v0.4.0</code>용. 텍스트 56,317개 한국어화.
+                      <strong>이미지는 원본 그대로</strong> 나옵니다.</li>
+                  <li><strong>v0.1.0</strong> — 게임 데이터 <code>v0.2.0</code>용. 텍스트 132,357개 전량 번역에
+                      이미지도 1,861개 중 1,685개(90.5%) 한글화되어 있습니다.
+                      <a href="https://github.com/TeamLimRyan/YW3_SUKIYAKI_KOREAN_LOCALIZATION_RELEASE/releases/download/v0.1.0/YW3S_Korean_Patch_v0.1.0.zip">v0.1.0 내려받기</a></li>
+                </ul>
                 <br />남은 이미지 식자를 도와주실 분을 찾고 있습니다 —
                 <a href="https://github.com/TeamLimRyan/YW3_SUKIYAKI_KOREAN_LOCALIZATION_RELEASE/blob/main/IMAGE_LOCALIZATION_STATUS.md"
                    target="_blank" rel="noopener">작업자 모집 안내 ↗</a>
@@ -557,10 +624,12 @@
 
               <h4>지원 환경</h4>
               <ul>
-                <li>닌텐도 3DS 일본판 <code>妖怪ウォッチ３ スキヤキ</code> 버전 <code>0.2.0</code></li>
-                <li>Title ID <code>00040000001AF400</code> · Product Code <code>CTR-P-ALZJ</code></li>
+                <li>닌텐도 3DS 일본판 <code>妖怪ウォッチ３ スキヤキ</code></li>
+                <li>Title ID <code>00040000001AF400</code> &middot; Product Code <code>CTR-P-ALZJ</code></li>
                 <li>Luma3DS 또는 지원 에뮬레이터의 LayeredFS 환경</li>
-                <li>원본 <code>yw_a.fa</code> SHA-256 <code>CB5C8C0F…BD779B</code> 와 일치하는 파일</li>
+                <li>v0.4.0 입력 <code>yw_a.fa</code> SHA-256 <code>52F93208…5E4F91F</code>
+                    — v0.2.0 전체 ARC0에 공식 v0.4.0 델타를 합친 무수정 파일</li>
+                <li>v0.1.0 입력 <code>yw_a.fa</code> SHA-256 <code>CB5C8C0F…BD779B</code></li>
               </ul>
 
               <h4>설치</h4>
@@ -572,16 +641,15 @@
                 <li>원본은 따로 보관하고, 생성된 파일을 <code>yw_a.fa</code>라는 이름으로 LayeredFS 경로에 넣습니다.</li>
               </ol>
               <p style="margin:10px 0 0">
-                명령행에서는 <code>apply_patch.bat "원본\yw_a.fa" "출력\yw_a.ko.fa"</code> 로도 실행할 수 있습니다.
                 원본 지문이 다르면 파일을 건드리지 않고 중단합니다.
                 CIA, ROM, 키, 펌웨어, 원본 게임 데이터는 들어 있지 않습니다.
               </p>
 
               <h4>파일 무결성</h4>
-              <p style="margin:0 0 4px"><code>YW3S_Korean_Patch_v0.1.0.zip</code> SHA-256</p>
+              <p style="margin:0 0 4px">v0.4.0 적용 결과 <code>yw_a.ko.fa</code> SHA-256</p>
+              <code class="hash">929EB272A60CF4F33208833441296D939E1FAA2F73A21A648B4511EF66BFB130</code>
+              <p style="margin:8px 0 4px">v0.1.0 배포 ZIP SHA-256</p>
               <code class="hash">672EEB78E77AC09CA53935B1B2029FED6F58ECFD920FE296189530FE630A38E8</code>
-              <p style="margin:8px 0 4px">적용 결과 <code>yw_a.ko.fa</code> SHA-256</p>
-              <code class="hash">4FE2EB54B759FEE03FB2B6525E8752F734CBBFC59EF4CC1A0C40491307364990</code>
 
             </div>
           </details>
@@ -726,6 +794,13 @@
       <h2 class="head">진행 이력</h2>
 
       <ol class="timeline">
+        <li>
+          <span class="date">2026-08-10</span>
+          <ul>
+            <li>테일즈 오브 더 월드 ~서머너즈 리니지~ 한국어 패치 <strong>v1.0.0</strong> 최초 공개 — 텍스트 5,822행, 이미지 70개</li>
+            <li>요괴워치 3 스키야키 <strong>v0.4.0</strong> 배포 — 게임 데이터 v0.4.0 대응, 신규 텍스트 10,103개 번역</li>
+          </ul>
+        </li>
         <li>
           <span class="date">2026-08-09</span>
           <ul>
