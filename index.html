@@ -4,12 +4,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>임라이언 번역방 · 한국어 패치</title>
-<meta name="description" content="테일즈 오브 더 월드 서머너즈 리니지, 요괴워치 3 스키야키, 두근두근 메모리얼 이모셔널, 태합입지전 V DX 비공식 한국어 패치 — by 임라이언" />
+<meta name="description" content="발키리 드라이브 비크니, 테일즈 오브 더 월드 서머너즈 리니지, 요괴워치 3 스키야키, 두근두근 메모리얼 이모셔널, 태합입지전 V DX 비공식 한국어 패치 — by 임라이언" />
 <link rel="icon" type="image/png" href="./favicon.png" />
 
 <meta property="og:type" content="website" />
 <meta property="og:title" content="임라이언 번역방 · 한국어 패치" />
-<meta property="og:description" content="테일즈 오브 더 월드 서머너즈 리니지, 요괴워치 3 스키야키, 두근두근 메모리얼 이모셔널, 태합입지전 V DX 비공식 한국어 패치" />
+<meta property="og:description" content="발키리 드라이브 비크니, 테일즈 오브 더 월드 서머너즈 리니지, 요괴워치 3 스키야키, 두근두근 메모리얼 이모셔널, 태합입지전 V DX 비공식 한국어 패치" />
 <meta property="og:image" content="./assets/hero.jpg" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -468,7 +468,7 @@
 <div class="notice" id="notice">
   <div class="wrap">
     <span class="tag">공지</span>
-    <p>테일즈 오브 더 월드 ~서머너즈 리니지~ <strong>v1.0.0</strong> 공개 · 요괴워치 3 스키야키 <strong>v0.4.0</strong> 배포 — 게임 데이터 버전에 맞는 쪽을 받으세요.</p>
+    <p>발키리 드라이브 -비크니- <strong>v0.1.0</strong> 공개 · 테일즈 오브 더 월드 <strong>v1.0.1</strong> 핫픽스 배포.</p>
     <button type="button" aria-label="공지 닫기" onclick="document.getElementById('notice').remove()">×</button>
   </div>
 </div>
@@ -525,17 +525,70 @@
 
       <div class="cards">
 
+        <!-- 발키리 드라이브 비크니 -->
+        <article class="card">
+          <div class="card-top">
+            <div class="card-txt">
+              <h3>발키리 드라이브 -비크니- 한국어 패치</h3>
+              <p class="latin">Valkyrie Drive -Bhikkhuni- &middot; PlayStation Vita</p>
+              <p class="meta">v0.1.0 &middot; 2026-08-12 &middot; 약 48MB</p>
+            </div>
+            <div class="card-act">
+              <a class="btn primary"
+                 href="https://github.com/TeamLimRyan/VALKYRIE_DRIVE_BHIKKHUNI_KOREAN_LOCALIZATION_RELEASE/releases/download/v0.1.0/VALKYRIE_DRIVE_BHIKKHUNI_KO_v0.1.0_rePatch.zip">↓ 다운로드</a>
+              <a class="btn"
+                 href="https://github.com/TeamLimRyan/VALKYRIE_DRIVE_BHIKKHUNI_KOREAN_LOCALIZATION_RELEASE" target="_blank" rel="noopener">자세히 ↗</a>
+            </div>
+          </div>
+
+          <details class="more">
+            <summary>지원 환경과 설치 방법</summary>
+            <div class="more-body">
+
+              <h4>지원 환경</h4>
+              <ul>
+                <li>PlayStation Vita 일본판 <code>PCSG00632</code></li>
+                <li>rePatch 플러그인이 설치된 환경</li>
+              </ul>
+
+              <h4>반영 범위</h4>
+              <ul>
+                <li>한국어 텍스트·폰트 교체 파일 45개</li>
+                <li>승인된 이미지 78개를 반영한 MIB 61개 &mdash; 총 rePatch 파일 106개</li>
+                <li>미승인·수정 필요·미검수 이미지 838개는 이번 배포에서 빠져 원본 그대로 나옵니다</li>
+              </ul>
+
+              <h4>설치</h4>
+              <ol>
+                <li>정식 <code>PCSG00632</code> 게임과 rePatch 플러그인을 준비합니다.</li>
+                <li>내려받은 ZIP을 풉니다.</li>
+                <li>압축 안의 <code>rePatch</code> 폴더를 Vita의 <code>ux0:/</code>에 복사합니다.</li>
+                <li>최종 경로가 <code>ux0:/rePatch/PCSG00632</code>인지 확인합니다.</li>
+              </ol>
+
+              <h4>파일 무결성</h4>
+              <p style="margin:0 0 4px"><code>VALKYRIE_DRIVE_BHIKKHUNI_KO_v0.1.0_rePatch.zip</code> SHA-256</p>
+              <code class="hash">F4E2B16B13FFE9509EB1EAA2B671B609D516F10ED1C9507C2707D38AF2A27C99</code>
+              <p style="margin:8px 0 0; color:var(--ink-soft)">
+                PowerShell에서 <code>Get-FileHash -Algorithm SHA256 .\VALKYRIE_DRIVE_BHIKKHUNI_KO_v0.1.0_rePatch.zip</code> 으로 확인할 수 있습니다.
+                원본 게임 데이터는 들어 있지 않습니다.
+              </p>
+
+            </div>
+          </details>
+        </article>
+
         <!-- 테일즈 오브 더 월드 -->
         <article class="card">
           <div class="card-top">
             <div class="card-txt">
               <h3>테일즈 오브 더 월드 ~서머너즈 리니지~ 한국어 패치</h3>
               <p class="latin">Tales of the World: Summoner&rsquo;s Lineage &middot; Game Boy Advance</p>
-              <p class="meta">v1.0.0 &middot; 2026-08-10 &middot; 약 232KB (xdelta)</p>
+              <p class="meta">v1.0.1 &middot; 2026-08-11 &middot; 약 251KB (xdelta)</p>
             </div>
             <div class="card-act">
               <a class="btn primary"
-                 href="https://github.com/TeamLimRyan/TALES_OF_THE_WORLD_SUMMONERS_LINEAGE_KOREAN_LOCALIZATION_RELEASE/releases/download/v1.0.0/Tales_of_the_World_Summoners_Lineage_KO.xdelta">↓ 다운로드</a>
+                 href="https://github.com/TeamLimRyan/TALES_OF_THE_WORLD_SUMMONERS_LINEAGE_KOREAN_LOCALIZATION_RELEASE/releases/download/v1.0.1/Tales_of_the_World_Summoners_Lineage_KO.xdelta">↓ 다운로드</a>
               <a class="btn"
                  href="https://github.com/TeamLimRyan/TALES_OF_THE_WORLD_SUMMONERS_LINEAGE_KOREAN_LOCALIZATION_RELEASE" target="_blank" rel="noopener">자세히 ↗</a>
             </div>
@@ -547,7 +600,7 @@
 
               <h4>지원 환경</h4>
               <ul>
-                <li>게임보이 어드밴스 일본판 · 게임 코드 <code>A9PJ</code></li>
+                <li>게임보이 어드밴스 일본판 &middot; 게임 코드 <code>A9PJ</code></li>
                 <li>원본 ROM 크기 <code>8,388,608</code> 바이트</li>
                 <li>원본 SHA-256 <code>b41c293f…6cfdd3</code></li>
               </ul>
@@ -562,7 +615,13 @@
                 <li>캐릭터·클래스·스킬·아이템 마스터 데이터 이름 필드 1,209개</li>
                 <li>승인된 이미지 70개 한글화</li>
                 <li>현대 한글 완성형 11,172자 글리프, 조합식 한글 이름 입력과 55키 자모 키보드</li>
-                <li>mGBA에서 부팅·메뉴·이름 입력·초반 대사 확인</li>
+              </ul>
+
+              <h4>v1.0.1에서 고친 것</h4>
+              <ul>
+                <li>저장 데이터 이름용 8&times;8 한글 글꼴 추가</li>
+                <li>맵의 <code>마법진</code> 표기 반영</li>
+                <li><code>강함</code> 화면 타일셋 오버플로 수정</li>
               </ul>
 
               <h4>설치</h4>
@@ -576,9 +635,9 @@
 
               <h4>파일 무결성</h4>
               <p style="margin:0 0 4px">패치 <code>.xdelta</code> SHA-256</p>
-              <code class="hash">550aa8ac8f176171ec524825f9fe6c2a19f0a3237ae78c7edc0a62f57157ba11</code>
-              <p style="margin:8px 0 4px">적용 결과 ROM SHA-256 (<code>8,937,092</code> 바이트)</p>
-              <code class="hash">43c315b28b54c944aa862c838d54c464c4c66bdaa1214ce739113ba6b8860be4</code>
+              <code class="hash">673d921ab3c29b585d1b7e2ccf28a9fa8b1a29cfbbc1d6791187c97cd24c856f</code>
+              <p style="margin:8px 0 4px">적용 결과 ROM SHA-256</p>
+              <code class="hash">ba353cfd547db33460711065cefec526920e39e4a09f2e3d4a3883c5ee36bc9e</code>
               <p style="margin:8px 0 0; color:var(--ink-soft)">
                 원본 ROM, 완성 ROM, BIOS, 세이브 데이터는 배포하지 않습니다.
               </p>
@@ -794,6 +853,18 @@
       <h2 class="head">진행 이력</h2>
 
       <ol class="timeline">
+        <li>
+          <span class="date">2026-08-12</span>
+          <ul>
+            <li>발키리 드라이브 -비크니- 한국어 패치 <strong>v0.1.0</strong> 최초 공개 &mdash; 텍스트·폰트 45개, 승인 이미지 78개</li>
+          </ul>
+        </li>
+        <li>
+          <span class="date">2026-08-11</span>
+          <ul>
+            <li>테일즈 오브 더 월드 ~서머너즈 리니지~ <strong>v1.0.1</strong> 핫픽스 &mdash; 저장 데이터 이름 글꼴 추가, 타일셋 오버플로 수정</li>
+          </ul>
+        </li>
         <li>
           <span class="date">2026-08-10</span>
           <ul>
