@@ -30,3 +30,22 @@ CREATE TABLE IF NOT EXISTS auth_fail (
   fails INTEGER NOT NULL,
   seen  INTEGER NOT NULL
 );
+
+-- ---- 비밀글과 답글 (2026-08-19 추가) ----
+-- 기존 entries 테이블에 컬럼을 덧붙이는 마이그레이션이다.
+-- 이미 적용된 저장소에서는 ALTER 두 줄이 duplicate column 오류를 내므로,
+-- 그 경우에는 오류를 무시하고 넘어가면 된다.
+--
+--   ALTER TABLE entries ADD COLUMN secret INTEGER NOT NULL DEFAULT 0;
+--   ALTER TABLE entries ADD COLUMN pw_hash TEXT;
+
+-- 관리자만 다는 답글.
+CREATE TABLE IF NOT EXISTS comments (
+  id         TEXT    PRIMARY KEY,
+  entry_id   TEXT    NOT NULL,
+  message    TEXT    NOT NULL,
+  created_at INTEGER NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS comments_entry
+  ON comments (entry_id, created_at);

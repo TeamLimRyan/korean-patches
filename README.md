@@ -56,8 +56,10 @@ https://github.com/TeamLimRyan/<저장소>/releases/download/<태그>/<파일명
 Cloudflare Worker + D1로 굴러갑니다. GitHub Pages는 정적 파일만 주므로 글 저장은 Worker가 맡습니다.
 
 - **글쓰기는 로그인이 필요 없습니다.** 닉네임과 내용만 적으면 됩니다.
-- **삭제는 관리자 암호를 아는 사람만 합니다.** 페이지 방명록의 `관리자` 버튼을 눌러 암호를 넣으면 각 글에 삭제 버튼이 생깁니다.
-- 수정 기능은 없습니다.
+- **비밀글**을 고르면 글쓴이가 정한 열람 암호(4~20자)를 아는 사람과 관리자만 본문을 볼 수 있습니다. 화면에서 가리는 방식이 아니라 서버가 본문을 아예 빼고 내려보냅니다.
+- **답글은 관리자만** 답니다. 방문자는 답글을 달 수 없습니다.
+- **삭제는 관리자 암호를 아는 사람만 합니다.** 페이지 방명록의 `관리자` 버튼을 눌러 암호를 넣으면 각 글에 삭제·답글 버튼이 생깁니다.
+- 글 수정 기능은 없습니다.
 
 ### 구성
 
@@ -74,10 +76,15 @@ API 주소는 [`assets/guestbook-config.js`](assets/guestbook-config.js)에 들�
 
 | 메서드 | 경로 | 설명 |
 |---|---|---|
-| `GET` | `/entries` | 최근 글 목록 |
-| `POST` | `/entries` | 글 남기기 (`{name, message}`) |
-| `DELETE` | `/entries/:id` | 글 지우기 (`Authorization: Bearer <암호>`) |
-| `POST` | `/admin/check` | 암호가 맞는지만 확인 |
+| `GET` | `/entries` | 최근 글 목록. 비밀글은 본문과 답글을 빼고 내려줍니다 |
+| `POST` | `/entries` | 글 남기기 (`{name, message, secret?, password?}`) |
+| `POST` | `/entries/:id/unlock` | 비밀글을 열람 암호로 열기 (`{password}`) |
+| `DELETE` | `/entries/:id` | 글 지우기 (관리자) |
+| `POST` | `/entries/:id/comments` | 답글 달기 (관리자, `{message}`) |
+| `DELETE` | `/comments/:id` | 답글 지우기 (관리자) |
+| `POST` | `/admin/check` | 관리자 암호가 맞는지만 확인 |
+
+관리자 요청은 모두 `Authorization: Bearer <관리자 암호>` 헤더를 붙입니다.
 
 ### 관리자 암호 바꾸기
 
@@ -88,13 +95,15 @@ npx wrangler secret put ADMIN_TOKEN
 
 암호는 저장소 어디에도 없고 Worker secret 으로만 존재합니다. 브라우저에는 탭을 닫으면 사라지는 `sessionStorage`에만 잠깐 남습니다. 값을 바꾸면 반영까지 몇십 초 걸릴 수 있습니다.
 
-틀린 암호를 한 회선에서 5번 넣으면 그 회선은 10분 동안 막힙니다(`AUTH_MAX_FAILS`, `AUTH_BLOCK_MS`). 막혀 있는 동안에는 맞는 암호를 넣어도 통과되지 않고, 한 번 맞히면 실패 기록은 지워집니다. 짧은 암호를 쓰더라도 마구 찔러 볼 수 없게 하려는 장치입니다.
+틀린 암호를 한 회선에서 5번 넣으면 그 회선은 10분 동안 막힙니다(`AUTH_MAX_FAILS`, `AUTH_BLOCK_MS`). 비밀글 열람 암호도 같은 방식으로 따로 셉니다. 막혀 있는 동안에는 맞는 암호를 넣어도 통과되지 않고, 한 번 맞히면 실패 기록은 지워집니다. 짧은 암호를 쓰더라도 마구 찔러 볼 수 없게 하려는 장치입니다.
 
 실수로 스스로 막혔다면 이렇게 풉니다.
 
 ```
 npx wrangler d1 execute limryan-guestbook --remote --command="DELETE FROM auth_fail;"
 ```
+
+비밀글 열람 암호는 되찾을 수 없습니다. 글쓴이가 잊었다면 관리자가 대신 읽어 주거나 글을 지우는 수밖에 없습니다.
 
 ### 서버 고치고 다시 올리기
 

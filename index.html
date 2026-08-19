@@ -374,6 +374,14 @@
   .gb-admin:hover{ color:var(--ink); border-color:var(--line); background:var(--card); }
   .gb-admin-who:empty + .gb-admin{ margin-left:auto; }
 
+  .gb-secret{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:10px; }
+  .gb-check{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:13px; color:var(--ink-mid); cursor:pointer; user-select:none;
+  }
+  .gb-check input{ accent-color:var(--gold); width:15px; height:15px; cursor:pointer; }
+  #gb-pw{ max-width:220px; }
+
   .gb-list{ display:flex; flex-direction:column; gap:10px; }
   .gb-state{
     margin:0; font-size:13px; color:var(--ink-soft);
@@ -407,6 +415,48 @@
   }
   .gb-entry .del:hover{ background:#fbeae0; border-color:#d99a76; }
   .gb-entry .del[disabled]{ opacity:.5; cursor:default; }
+  .gb-entry .reply{
+    margin-left:6px; flex:0 0 auto;
+    font-family:var(--sans); font-size:11px;
+    color:var(--gold-deep); background:none; cursor:pointer;
+    border:1px solid var(--line); border-radius:4px; padding:2px 8px;
+  }
+  .gb-entry .reply:hover{ background:var(--butter); }
+  .gb-entry .who .lock{
+    flex:0 0 auto;
+    font-size:10px; letter-spacing:.08em;
+    padding:1px 7px; border-radius:3px;
+    background:var(--butter); border:1px solid var(--line); color:var(--gold-deep);
+  }
+  .gb-entry p.hidden-body{ color:var(--ink-soft); font-style:italic; }
+  .gb-entry .open{
+    margin-top:6px;
+    font-family:var(--sans); font-size:11px;
+    color:var(--ink); background:var(--paper-alt); cursor:pointer;
+    border:1px solid var(--line); border-radius:4px; padding:3px 10px;
+  }
+  .gb-entry .open:hover{ background:var(--butter); border-color:var(--gold); }
+
+  .gb-comments{
+    list-style:none; margin:10px 0 0; padding:10px 0 0;
+    border-top:1px dashed var(--line);
+    display:flex; flex-direction:column; gap:8px;
+  }
+  .gb-comment{ display:flex; align-items:flex-start; gap:9px; }
+  .gb-comment::before{
+    content:"↳"; flex:0 0 auto;
+    color:var(--gold); font-size:13px; line-height:1.6;
+  }
+  .gb-comment .body{ flex:1 1 auto; min-width:0; }
+  .gb-comment .head{ display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; }
+  .gb-comment .head b{
+    font-family:var(--serif); font-size:13px; color:var(--gold-deep); font-weight:700;
+  }
+  .gb-comment .head time{ font-family:var(--mono); font-size:11px; color:var(--ink-soft); }
+  .gb-comment p{
+    margin:1px 0 0; font-size:13px; color:var(--ink-mid);
+    white-space:pre-wrap; overflow-wrap:anywhere;
+  }
 
   /* ---------- 푸터 ---------- */
   .footer-art{ position:relative; max-width:1120px; margin:44px auto 0; }
@@ -1056,7 +1106,7 @@
       <h2 class="head">방명록</h2>
       <p class="book-note">
         패치가 도움이 되셨다면 한마디 남겨 주세요. 응원은 큰 힘이 됩니다.
-        로그인 없이 닉네임만 적으면 됩니다. 버그 제보는 방명록보다 각 패치 저장소의 Issues가 더 빠릅니다.
+        로그인 없이 닉네임만 적으면 됩니다. 남들에게 보이지 않게 남기려면 <strong>비밀글</strong>에 표시하고 열람 암호를 정해 주세요. 버그 제보는 방명록보다 각 패치 저장소의 Issues가 더 빠릅니다.
       </p>
 
       <form class="gb-form" id="gb-form" hidden>
@@ -1069,6 +1119,14 @@
                   placeholder="한마디 남겨 주세요" aria-label="남길 말"></textarea>
         <!-- 봇 잡이. 사람 눈에는 보이지 않으며, 채워져 있으면 저장하지 않는다. -->
         <input class="gb-trap" id="gb-trap" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="gb-secret">
+          <label class="gb-check">
+            <input type="checkbox" id="gb-secret" />
+            비밀글
+          </label>
+          <input id="gb-pw" type="password" maxlength="20" placeholder="열람 암호 (4자 이상)"
+                 autocomplete="new-password" aria-label="비밀글 열람 암호" hidden />
+        </div>
         <div class="gb-actions">
           <p class="gb-msg" id="gb-msg" role="status"></p>
           <button class="btn primary" type="submit" id="gb-submit">남기기</button>
@@ -1142,6 +1200,8 @@
   const countEl  = el('gb-count');
   const noteEl   = el('gb-msg');
   const submitEl = el('gb-submit');
+  const secretEl = el('gb-secret');
+  const pwEl     = el('gb-pw');
   const adminBtn = el('gb-admin');
   const adminWho = el('gb-admin-who');
   const totalEl  = el('gb-total');
@@ -1153,6 +1213,7 @@
   let token = sessionStorage.getItem(TOKEN_KEY) || '';
 
   const api = (path) => API_BASE.replace(/\/+$/, '') + path;
+  const authHeaders = () => (token ? { Authorization: 'Bearer ' + token } : {});
 
   function setState(text) {
     listEl.textContent = '';
@@ -1180,13 +1241,50 @@
   }
 
   function paintAdmin() {
-    if (token) {
-      adminBtn.textContent = '관리자 나가기';
-      adminWho.textContent = '관리자로 열려 있음';
-    } else {
-      adminBtn.textContent = '관리자';
-      adminWho.textContent = '';
+    adminBtn.textContent = token ? '관리자 나가기' : '관리자';
+    adminWho.textContent = token ? '관리자로 열려 있음' : '';
+  }
+
+  function timeNode(ms) {
+    const t = document.createElement('time');
+    t.textContent = whenText(ms);
+    if (ms) t.dateTime = new Date(ms).toISOString();
+    return t;
+  }
+
+  function commentList(entry) {
+    const ul = document.createElement('ul');
+    ul.className = 'gb-comments';
+    for (const c of entry.comments || []) {
+      const li = document.createElement('li');
+      li.className = 'gb-comment';
+
+      const body = document.createElement('div');
+      body.className = 'body';
+
+      const head = document.createElement('div');
+      head.className = 'head';
+      const who = document.createElement('b');
+      who.textContent = '임라이언';
+      head.append(who, timeNode(c.createdAt));
+
+      if (token) {
+        const del = document.createElement('button');
+        del.type = 'button';
+        del.className = 'del';
+        del.textContent = '삭제';
+        del.addEventListener('click', () => removeComment(entry, c, del));
+        head.append(del);
+      }
+
+      const text = document.createElement('p');
+      text.textContent = c.message || '';
+
+      body.append(head, text);
+      li.append(body);
+      ul.append(li);
     }
+    return ul;
   }
 
   function paint() {
@@ -1206,26 +1304,54 @@
 
       const nameNode = document.createElement('b');
       nameNode.textContent = entry.name || '이름 없음';
+      who.append(nameNode, timeNode(entry.createdAt));
 
-      const timeNode = document.createElement('time');
-      timeNode.textContent = whenText(entry.createdAt);
-      if (entry.createdAt) timeNode.dateTime = new Date(entry.createdAt).toISOString();
+      if (entry.secret) {
+        const lock = document.createElement('span');
+        lock.className = 'lock';
+        lock.textContent = '🔒 비밀글';
+        who.append(lock);
+      }
 
-      who.append(nameNode, timeNode);
+      const locked = Boolean(entry.locked);
 
       if (token) {
+        const reply = document.createElement('button');
+        reply.type = 'button';
+        reply.className = 'reply';
+        reply.textContent = '답글';
+        reply.addEventListener('click', () => addComment(entry, reply));
+
         const del = document.createElement('button');
         del.type = 'button';
         del.className = 'del';
         del.textContent = '삭제';
-        del.addEventListener('click', () => remove(entry, del));
-        who.append(del);
+        del.addEventListener('click', () => removeEntry(entry, del));
+
+        who.append(del, reply);
       }
 
       const body = document.createElement('p');
-      body.textContent = entry.message || '';
+      if (locked) {
+        body.className = 'hidden-body';
+        body.textContent = '비밀글입니다. 글쓴이와 임라이언만 볼 수 있습니다.';
+      } else {
+        body.textContent = entry.message || '';
+      }
 
       item.append(who, body);
+
+      if (locked) {
+        const open = document.createElement('button');
+        open.type = 'button';
+        open.className = 'open';
+        open.textContent = '암호 넣고 열기';
+        open.addEventListener('click', () => unlock(entry, open));
+        item.append(open);
+      } else if ((entry.comments || []).length) {
+        item.append(commentList(entry));
+      }
+
       frag.append(item);
     }
     listEl.textContent = '';
@@ -1234,7 +1360,7 @@
 
   async function load() {
     try {
-      const res = await fetch(api('/entries'), { headers: { Accept: 'application/json' } });
+      const res = await fetch(api('/entries'), { headers: { Accept: 'application/json', ...authHeaders() } });
       if (!res.ok) throw new Error('status ' + res.status);
       const data = await res.json();
       entries = Array.isArray(data.entries) ? data.entries : [];
@@ -1245,14 +1371,28 @@
     }
   }
 
+  // ---- 비밀글 토글 ----
+  secretEl.addEventListener('change', () => {
+    pwEl.hidden = !secretEl.checked;
+    if (secretEl.checked) pwEl.focus();
+    else pwEl.value = '';
+  });
+
+  // ---- 글 남기기 ----
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (trapEl.value) return;                       // 봇 잡이
 
     const name = nameEl.value.trim();
     const message = msgEl.value.trim();
+    const secret = secretEl.checked;
+    const password = pwEl.value.trim();
+
     if (!name)    { note('닉네임을 적어 주세요.', 'err'); nameEl.focus(); return; }
     if (!message) { note('남길 말을 적어 주세요.', 'err'); msgEl.focus(); return; }
+    if (secret && password.length < 4) {
+      note('비밀글은 4자 이상의 열람 암호가 필요합니다.', 'err'); pwEl.focus(); return;
+    }
 
     const last = Number(localStorage.getItem(COOLDOWN_KEY) || 0);
     const wait = Math.ceil((last + COOLDOWN_SECONDS * 1000 - Date.now()) / 1000);
@@ -1264,7 +1404,7 @@
       const res = await fetch(api('/entries'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, message }),
+        body: JSON.stringify(secret ? { name, message, secret: true, password } : { name, message }),
       });
       const data = await res.json().catch(() => ({}));
 
@@ -1274,8 +1414,9 @@
       }
       if (!res.ok) {
         note(
-          data.error === 'bad_name'    ? '닉네임은 20자까지입니다.' :
-          data.error === 'bad_message' ? '내용은 500자까지입니다.' :
+          data.error === 'bad_name'     ? '닉네임은 20자까지입니다.' :
+          data.error === 'bad_message'  ? '내용은 500자까지입니다.' :
+          data.error === 'bad_password' ? '열람 암호는 4~20자로 정해 주세요.' :
           '남기지 못했습니다. 잠시 뒤 다시 시도해 주세요.',
           'err'
         );
@@ -1286,7 +1427,10 @@
       if (data.entry) entries.unshift(data.entry);
       msgEl.value = '';
       countEl.textContent = '0 / 500';
-      note('남겼습니다. 고맙습니다!', 'ok');
+      secretEl.checked = false;
+      pwEl.value = '';
+      pwEl.hidden = true;
+      note(secret ? '비밀글로 남겼습니다. 암호를 잊지 마세요.' : '남겼습니다. 고맙습니다!', 'ok');
       paint();
     } catch (err) {
       console.error(err);
@@ -1300,22 +1444,45 @@
     countEl.textContent = msgEl.value.length + ' / 500';
   });
 
-  async function remove(entry, button) {
+  // ---- 비밀글 열기 ----
+  async function unlock(entry, button) {
+    const password = prompt('이 글을 남길 때 정한 열람 암호를 넣어 주세요.');
+    if (!password) return;
+    button.disabled = true;
+    try {
+      const res = await fetch(api('/entries/' + encodeURIComponent(entry.id) + '/unlock'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (res.status === 429) {
+        alert('암호를 여러 번 틀렸습니다. ' + (data.wait || 600) + '초 뒤에 다시 시도해 주세요.');
+        return;
+      }
+      if (!res.ok) { alert('암호가 맞지 않습니다.'); return; }
+
+      Object.assign(entry, data.entry, { locked: false });
+      paint();
+    } catch (err) {
+      console.error(err);
+      alert('열지 못했습니다. 잠시 뒤 다시 시도해 주세요.');
+    } finally {
+      button.disabled = false;
+    }
+  }
+
+  // ---- 관리자: 글 삭제 ----
+  async function removeEntry(entry, button) {
     if (!confirm('"' + (entry.name || '이름 없음') + '" 님의 글을 지울까요?')) return;
     button.disabled = true;
     try {
       const res = await fetch(api('/entries/' + encodeURIComponent(entry.id)), {
         method: 'DELETE',
-        headers: { Authorization: 'Bearer ' + token },
+        headers: authHeaders(),
       });
-      if (res.status === 401) {
-        token = '';
-        sessionStorage.removeItem(TOKEN_KEY);
-        paintAdmin();
-        paint();
-        alert('관리자 암호가 더 이상 맞지 않습니다. 다시 로그인해 주세요.');
-        return;
-      }
+      if (res.status === 401) { dropToken(); return; }
       if (!res.ok && res.status !== 404) throw new Error('status ' + res.status);
       entries = entries.filter((x) => x.id !== entry.id);
       paint();
@@ -1326,12 +1493,65 @@
     }
   }
 
+  // ---- 관리자: 답글 ----
+  async function addComment(entry, button) {
+    const message = prompt('"' + (entry.name || '이름 없음') + '" 님에게 남길 답글');
+    if (!message || !message.trim()) return;
+    button.disabled = true;
+    try {
+      const res = await fetch(api('/entries/' + encodeURIComponent(entry.id) + '/comments'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', ...authHeaders() },
+        body: JSON.stringify({ message: message.trim() }),
+      });
+      if (res.status === 401) { dropToken(); return; }
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) { alert('답글을 남기지 못했습니다.'); return; }
+      if (!entry.comments) entry.comments = [];
+      entry.comments.push(data.comment);
+      paint();
+    } catch (err) {
+      console.error(err);
+      alert('답글을 남기지 못했습니다. 잠시 뒤 다시 시도해 주세요.');
+    } finally {
+      button.disabled = false;
+    }
+  }
+
+  async function removeComment(entry, comment, button) {
+    if (!confirm('이 답글을 지울까요?')) return;
+    button.disabled = true;
+    try {
+      const res = await fetch(api('/comments/' + encodeURIComponent(comment.id)), {
+        method: 'DELETE',
+        headers: authHeaders(),
+      });
+      if (res.status === 401) { dropToken(); return; }
+      if (!res.ok && res.status !== 404) throw new Error('status ' + res.status);
+      entry.comments = (entry.comments || []).filter((c) => c.id !== comment.id);
+      paint();
+    } catch (err) {
+      console.error(err);
+      button.disabled = false;
+      alert('지우지 못했습니다. 잠시 뒤 다시 시도해 주세요.');
+    }
+  }
+
+  function dropToken() {
+    token = '';
+    sessionStorage.removeItem(TOKEN_KEY);
+    paintAdmin();
+    load();
+    alert('관리자 암호가 더 이상 맞지 않습니다. 다시 로그인해 주세요.');
+  }
+
+  // ---- 관리자 로그인 ----
   adminBtn.addEventListener('click', async () => {
     if (token) {
       token = '';
       sessionStorage.removeItem(TOKEN_KEY);
       paintAdmin();
-      paint();
+      load();
       return;
     }
 
@@ -1343,11 +1563,16 @@
         method: 'POST',
         headers: { Authorization: 'Bearer ' + input },
       });
+      const data = await res.json().catch(() => ({}));
+      if (res.status === 429) {
+        alert('암호를 여러 번 틀렸습니다. ' + (data.wait || 600) + '초 뒤에 다시 시도해 주세요.');
+        return;
+      }
       if (!res.ok) { alert('암호가 맞지 않습니다.'); return; }
       token = input;
       sessionStorage.setItem(TOKEN_KEY, token);
       paintAdmin();
-      paint();
+      load();
     } catch (err) {
       console.error(err);
       alert('확인하지 못했습니다. 잠시 뒤 다시 시도해 주세요.');
