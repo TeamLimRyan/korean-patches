@@ -4,12 +4,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>임라이언 번역방 · 한국어 패치</title>
-<meta name="description" content="서몬나이트 크래프트 소드 이야기, 기동전사 건담 신 기렌의 야망, 요괴워치 3 스키야키, 발키리 드라이브 비크니, 테일즈 오브 더 월드, 두근두근 메모리얼 이모셔널, 태합입지전 V DX 비공식 한국어 패치 — by 임라이언" />
+<meta name="description" content="테일즈 오브 판타지아 나리키리 던전, 서몬나이트 크래프트 소드 이야기 3부작, 기동전사 건담 신 기렌의 야망, 요괴워치 3 스키야키, 발키리 드라이브 비크니, 두근두근 메모리얼 이모셔널, 태합입지전 V DX 비공식 한국어 패치 — by 임라이언" />
 <link rel="icon" type="image/png" href="./favicon.png" />
 
 <meta property="og:type" content="website" />
 <meta property="og:title" content="임라이언 번역방 · 한국어 패치" />
-<meta property="og:description" content="서몬나이트 크래프트 소드 이야기, 기동전사 건담 신 기렌의 야망, 요괴워치 3 스키야키, 발키리 드라이브 비크니, 테일즈 오브 더 월드, 두근두근 메모리얼 이모셔널, 태합입지전 V DX 비공식 한국어 패치" />
+<meta property="og:description" content="테일즈 오브 판타지아 나리키리 던전, 서몬나이트 크래프트 소드 이야기 3부작, 기동전사 건담 신 기렌의 야망, 요괴워치 3 스키야키, 발키리 드라이브 비크니, 두근두근 메모리얼 이모셔널, 태합입지전 V DX 비공식 한국어 패치" />
 <meta property="og:image" content="./assets/hero.jpg" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -518,7 +518,7 @@
 <div class="notice" id="notice">
   <div class="wrap">
     <span class="tag">공지</span>
-    <p>서몬나이트 크래프트 소드 이야기 <strong>v1.0.3</strong> · 기동전사 건담 신 기렌의 야망 <strong>v0.2.0</strong> 공개.</p>
+    <p>테일즈 오브 판타지아 나리키리 던전 <strong>v1.0.0</strong> 공개 · 서몬나이트 크래프트 소드 이야기 3부작 모두 배포.</p>
     <button type="button" aria-label="공지 닫기" onclick="document.getElementById('notice').remove()">×</button>
   </div>
 </div>
@@ -575,17 +575,129 @@
 
       <div class="cards">
 
+        <!-- 테일즈 오브 판타지아 나리키리 던전 -->
+        <article class="card">
+          <div class="card-top">
+            <div class="card-txt">
+              <h3>테일즈 오브 판타지아 나리키리 던전 한국어 패치</h3>
+              <p class="latin">Tales of Phantasia: Narikiri Dungeon &middot; Game Boy Color</p>
+              <p class="meta">v1.0.0 &middot; 2026-08-22 &middot; 약 82KB (xdelta)</p>
+            </div>
+            <div class="card-act">
+              <a class="btn primary"
+                 href="https://github.com/TeamLimRyan/TALES_OF_PHANTASIA_NARIKIRI_DUNGEON_KOREAN_LOCALIZATION_RELEASE/releases/download/v1.0.0/Tales_of_Phantasia_Narikiri_Dungeon_KO.xdelta">↓ 다운로드</a>
+              <a class="btn" href="https://github.com/TeamLimRyan/TALES_OF_PHANTASIA_NARIKIRI_DUNGEON_KOREAN_LOCALIZATION_RELEASE" target="_blank" rel="noopener">자세히 ↗</a>
+            </div>
+          </div>
+
+          <details class="more">
+            <summary>지원 환경과 설치 방법</summary>
+            <div class="more-body">
+
+              <h4>지원 환경</h4>
+              <ul>
+                <li>게임보이 컬러 일본판 &middot; 제품 코드 <code>AN6J</code></li>
+                <li>원본 ROM 크기 <code>2,097,152</code> 바이트</li>
+                <li>원본 SHA-256 <code>e3853a07…db73a05</code></li>
+              </ul>
+
+              <h4>반영 범위</h4>
+              <ul>
+                <li>이벤트 895행과 마스터·UI 1,773행, 합계 2,668행 번역</li>
+                <li>번역 정본 밖 고정 UI 19군 156레코드 한국어화</li>
+                <li>현대 한글 완성형 11,172자 글리프와 조합식 한글 이름 입력</li>
+                <li>자음 14자·모음 10자·동작 4칸의 28칸 한글 자판</li>
+                <li>타이틀, 시작 프롬프트, 시간 경과 안내 등 이미지 자원 5개</li>
+              </ul>
+
+              <h4>설치</h4>
+              <ol>
+                <li>정품 일본판 ROM을 직접 준비합니다.</li>
+                <li><code>Tales_of_Phantasia_Narikiri_Dungeon_KO.xdelta</code>를 내려받습니다.</li>
+                <li><code>python scripts/apply_patch.py "Tales of Phantasia - Narikiri Dungeon (Japan).gbc"</code></li>
+                <li>직접 하려면 <code>xdelta3 -d -s &lt;원본.gbc&gt; &lt;패치.xdelta&gt; narikiri_dungeon_ko.gbc</code></li>
+              </ol>
+
+              <h4>파일 무결성</h4>
+              <p style="margin:0 0 4px">패치 <code>.xdelta</code> SHA-256</p>
+              <code class="hash">7500a2ddc4baf5c087858b204a950f507b23d3f511395637adfea15cfa37fd70</code>
+              <p style="margin:8px 0 4px">적용 결과 ROM SHA-256 (<code>4,194,304</code> 바이트)</p>
+              <code class="hash">cf4bd218396f34d78786ec094a2d0be4531d9f2a7586381b5c2865394acbece2</code>
+              <p style="margin:8px 0 0; color:var(--ink-soft)">
+                원본 ROM, 완성 ROM, BIOS, 세이브 데이터는 배포하지 않습니다.
+              </p>
+
+            </div>
+          </details>
+        </article>
+
+        <!-- 서몬나이트 시작의 돌 -->
+        <article class="card">
+          <div class="card-top">
+            <div class="card-txt">
+              <h3>서몬나이트 크래프트 소드 이야기 ~시작의 돌~ 한국어 패치</h3>
+              <p class="latin">Summon Night: Craft Sword Monogatari &mdash; Hajimari no Ishi &middot; Game Boy Advance</p>
+              <p class="meta">v1.0.1 &middot; 2026-08-22 &middot; 약 5MB (xdelta)</p>
+            </div>
+            <div class="card-act">
+              <a class="btn primary"
+                 href="https://github.com/TeamLimRyan/SUMMON_NIGHT_CRAFT_SWORD_MONOGATARI_HAJIMARI_NO_ISHI_KOREAN_LOCALIZATION_RELEASE/releases/download/v1.0.1/Summon_Night_Craft_Sword_Monogatari_Hajimari_no_Ishi_KO.xdelta">↓ 다운로드</a>
+              <a class="btn" href="https://github.com/TeamLimRyan/SUMMON_NIGHT_CRAFT_SWORD_MONOGATARI_HAJIMARI_NO_ISHI_KOREAN_LOCALIZATION_RELEASE" target="_blank" rel="noopener">자세히 ↗</a>
+            </div>
+          </div>
+
+          <details class="more">
+            <summary>지원 환경과 설치 방법</summary>
+            <div class="more-body">
+
+              <h4>지원 환경</h4>
+              <ul>
+                <li>게임보이 어드밴스 일본판 &middot; 게임 코드 <code>B3CJ</code></li>
+                <li>원본 ROM 크기 <code>33,554,432</code> 바이트</li>
+                <li>원본 SHA-256 <code>39bc4cf4…7fad2d</code></li>
+              </ul>
+
+              <h4>반영 범위</h4>
+              <ul>
+                <li>정본 텍스트 43,101행과 PSI 문자열 1,769행, 합계 44,870행</li>
+                <li>이미지 149건 중 143건 한국어화, 6건은 원본 유지</li>
+                <li>고정 길이 위치명 필드 136건을 추가 발굴해 상태 메뉴의 일본어 잔재와 후행 깨짐 제거 (v1.0.1)</li>
+                <li>현대 한글 완성형 11,172자와 자모 51자 글리프</li>
+                <li>조합식 한글 이름 입력과 한글 자모 키보드</li>
+              </ul>
+
+              <h4>설치</h4>
+              <ol>
+                <li>정품 일본판 ROM을 직접 준비합니다.</li>
+                <li><code>Summon_Night_Craft_Sword_Monogatari_Hajimari_no_Ishi_KO.xdelta</code>를 내려받습니다.</li>
+                <li><code>python scripts/apply_patch.py "Summon Night - Craft Sword Monogatari - Hajimari no Ishi (Japan).gba"</code></li>
+                <li>직접 하려면 <code>xdelta3 -d -s &lt;원본.gba&gt; &lt;패치.xdelta&gt; hajimari_no_ishi_ko.gba</code></li>
+              </ol>
+
+              <h4>파일 무결성</h4>
+              <p style="margin:0 0 4px">패치 <code>.xdelta</code> SHA-256</p>
+              <code class="hash">edd93620b0a5b3f7b62b3cbf1ffa736a885a3d34efb3319a6ccac708b4b43c38</code>
+              <p style="margin:8px 0 4px">적용 결과 ROM SHA-256</p>
+              <code class="hash">6ead73b40a6b8dbfb873646ef749ce557487227a443e17bb3c1588c49ef09060</code>
+              <p style="margin:8px 0 0; color:var(--ink-soft)">
+                원본 ROM, 완성 ROM, BIOS, 세이브 데이터는 배포하지 않습니다.
+              </p>
+
+            </div>
+          </details>
+        </article>
+
         <!-- 서몬나이트 크래프트 소드 -->
         <article class="card">
           <div class="card-top">
             <div class="card-txt">
               <h3>서몬나이트 크래프트 소드 이야기 한국어 패치</h3>
               <p class="latin">Summon Night: Craft Sword Monogatari &middot; Game Boy Advance</p>
-              <p class="meta">v1.0.3 &middot; 2026-08-19 &middot; 약 907KB (xdelta)</p>
+              <p class="meta">v1.0.4 &middot; 2026-08-20 &middot; 약 908KB (xdelta)</p>
             </div>
             <div class="card-act">
               <a class="btn primary"
-                 href="https://github.com/TeamLimRyan/SUMMON_NIGHT_CRAFT_SWORD_MONOGATARI_KOREAN_LOCALIZATION_RELEASE/releases/download/v1.0.3/Summon_Night_Craft_Sword_Monogatari_KO.xdelta">↓ 다운로드</a>
+                 href="https://github.com/TeamLimRyan/SUMMON_NIGHT_CRAFT_SWORD_MONOGATARI_KOREAN_LOCALIZATION_RELEASE/releases/download/v1.0.4/Summon_Night_Craft_Sword_Monogatari_KO.xdelta">↓ 다운로드</a>
               <a class="btn" href="https://github.com/TeamLimRyan/SUMMON_NIGHT_CRAFT_SWORD_MONOGATARI_KOREAN_LOCALIZATION_RELEASE" target="_blank" rel="noopener">자세히 ↗</a>
             </div>
           </div>
@@ -607,7 +719,8 @@
               <h4>반영 범위</h4>
               <ul>
                 <li>활성 텍스트 30,812행 번역</li>
-                <li>이미지 텍스트 자산 72개와 런타임 타이틀·메뉴 보정 5건</li>
+                <li>이미지 텍스트 자산 72개와 런타임 타이틀·메뉴 보정 7건</li>
+                <li>클리어 세이브에서 해금되는 타이틀 메뉴 <code>불러오기</code>·<code>통신</code> 그래픽 한국어화 (v1.0.4)</li>
                 <li>장비·비전·액세서리·아이템·귀중품 이름 표시를 한글 문자열로 연결</li>
                 <li>하단 메뉴의 <code>LR:캐릭터 전환</code>·<code>LR:입력 전환</code> 그래픽 한국어화</li>
                 <li>현대 한글 완성형 11,172자 글리프, 조합식 한글 이름 입력과 자모 키보드</li>
@@ -624,9 +737,65 @@
 
               <h4>파일 무결성</h4>
               <p style="margin:0 0 4px">패치 <code>.xdelta</code> SHA-256</p>
-              <code class="hash">f1bc7801b4f3d402d8c0da161c6c24f79dcc5619a828f34001a90e8112938316</code>
+              <code class="hash">36d87514d284b450640167dd844d98801dcb67ec3dff02ad70d7019cece8a2dd</code>
+              <p style="margin:8px 0 4px">적용 결과 ROM SHA-256 (<code>16,777,216</code> 바이트)</p>
+              <code class="hash">6fedb9a082502a1e270a51a6eb900ffde62b837b82c695300d3aaa2490f9631d</code>
+              <p style="margin:8px 0 0; color:var(--ink-soft)">
+                원본 ROM, 완성 ROM, BIOS, 세이브 데이터는 배포하지 않습니다.
+              </p>
+
+            </div>
+          </details>
+        </article>
+
+        <!-- 서몬나이트 크래프트 소드 2 -->
+        <article class="card">
+          <div class="card-top">
+            <div class="card-txt">
+              <h3>서몬나이트 크래프트 소드 이야기 2 한국어 패치</h3>
+              <p class="latin">Summon Night: Craft Sword Monogatari 2 &middot; Game Boy Advance</p>
+              <p class="meta">v1.0.1 &middot; 2026-08-20 &middot; 약 1.4MB (xdelta)</p>
+            </div>
+            <div class="card-act">
+              <a class="btn primary"
+                 href="https://github.com/TeamLimRyan/SUMMON_NIGHT_CRAFT_SWORD_MONOGATARI_2_KOREAN_LOCALIZATION_RELEASE/releases/download/v1.0.1/Summon_Night_Craft_Sword_Monogatari_2_KO.xdelta">↓ 다운로드</a>
+              <a class="btn" href="https://github.com/TeamLimRyan/SUMMON_NIGHT_CRAFT_SWORD_MONOGATARI_2_KOREAN_LOCALIZATION_RELEASE" target="_blank" rel="noopener">자세히 ↗</a>
+            </div>
+          </div>
+
+          <details class="more">
+            <summary>지원 환경과 설치 방법</summary>
+            <div class="more-body">
+
+              <h4>지원 환경</h4>
+              <ul>
+                <li>게임보이 어드밴스 일본판 &middot; 게임 코드 <code>BSKJ</code></li>
+                <li>원본 ROM 크기 <code>16,777,216</code> 바이트</li>
+                <li>원본 SHA-256 <code>9abbff51…64360f</code></li>
+              </ul>
+
+              <h4>반영 범위</h4>
+              <ul>
+                <li>텍스트 슬롯 42,661개 한국어 빌드 반영</li>
+                <li>이미지 120건 중 116건 한국어화, 비문자 자산 4건은 원본 유지</li>
+                <li>현대 한글 완성형 11,172자와 자모 40자 글리프</li>
+                <li>조합식 한글 이름 입력과 한글 자모 키보드</li>
+                <li>환경 설정 진입 화면의 그래픽 2개는 타일 깨짐을 막기 위해 원본 <code>CONFIG</code> 그래픽을 씁니다 (v1.0.1)</li>
+              </ul>
+
+              <h4>설치</h4>
+              <ol>
+                <li>정품 일본판 ROM을 직접 준비합니다.</li>
+                <li><code>Summon_Night_Craft_Sword_Monogatari_2_KO.xdelta</code>를 내려받습니다.</li>
+                <li><code>python scripts/apply_patch.py "Summon Night - Craft Sword Monogatari 2 (Japan).gba"</code></li>
+                <li>직접 하려면 <code>xdelta3 -d -s &lt;원본.gba&gt; &lt;패치.xdelta&gt; summon_night_2_ko.gba</code></li>
+              </ol>
+
+              <h4>파일 무결성</h4>
+              <p style="margin:0 0 4px">패치 <code>.xdelta</code> SHA-256</p>
+              <code class="hash">a3d56a6a27ac24d61f835997440542a25c72f79ad567f67843e00acfac3e6619</code>
               <p style="margin:8px 0 4px">적용 결과 ROM SHA-256</p>
-              <code class="hash">235c901f5d37f6cc7d8286f2446ad300d8cb81830895e686638a52d659500d10</code>
+              <code class="hash">1c057a8e65676ec38e9cbd1ee6b5c60eab48ba6bd6f456d7574ae71b289a2b14</code>
               <p style="margin:8px 0 0; color:var(--ink-soft)">
                 원본 ROM, 완성 ROM, BIOS, 세이브 데이터는 배포하지 않습니다.
               </p>
@@ -1030,6 +1199,20 @@
       <h2 class="head">진행 이력</h2>
 
       <ol class="timeline">
+        <li>
+          <span class="date">2026-08-22</span>
+          <ul>
+            <li>테일즈 오브 판타지아 나리키리 던전 한국어 패치 <strong>v1.0.0</strong> 공개 &mdash; 텍스트 2,668행, 28칸 한글 자판</li>
+            <li>서몬나이트 크래프트 소드 이야기 ~시작의 돌~ <strong>v1.0.1</strong> 배포 &mdash; 위치명 필드 136건 추가 발굴</li>
+          </ul>
+        </li>
+        <li>
+          <span class="date">2026-08-20</span>
+          <ul>
+            <li>서몬나이트 크래프트 소드 이야기 2 한국어 패치 <strong>v1.0.1</strong> 공개 &mdash; 텍스트 슬롯 42,661개, 이미지 116건</li>
+            <li>서몬나이트 크래프트 소드 이야기 <strong>v1.0.4</strong> 배포 &mdash; 클리어 세이브 해금 타이틀 메뉴 한국어화</li>
+          </ul>
+        </li>
         <li>
           <span class="date">2026-08-19</span>
           <ul>
