@@ -4,12 +4,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>임라이언 번역방 · 한국어 패치</title>
-<meta name="description" content="서몬나이트 크래프트 소드 이야기, 기동전사 건담 신 기렌의 야망, 요괴워치 3 스키야키, 발키리 드라이브 비크니, 테일즈 오브 더 월드, 두근두근 메모리얼 이모셔널, 태합입지전 V DX 비공식 한국어 패치 — by 임라이언" />
+<meta name="description" content="테일즈 오브 판타지아 나리키리 던전, 서몬나이트 크래프트 소드 이야기, 기동전사 건담 신 기렌의 야망, 요괴워치 3 스키야키, 발키리 드라이브 비크니, 테일즈 오브 더 월드, 두근두근 메모리얼 이모셔널, 태합입지전 V DX 비공식 한국어 패치 — by 임라이언" />
 <link rel="icon" type="image/png" href="./favicon.png" />
 
 <meta property="og:type" content="website" />
 <meta property="og:title" content="임라이언 번역방 · 한국어 패치" />
-<meta property="og:description" content="서몬나이트 크래프트 소드 이야기, 기동전사 건담 신 기렌의 야망, 요괴워치 3 스키야키, 발키리 드라이브 비크니, 테일즈 오브 더 월드, 두근두근 메모리얼 이모셔널, 태합입지전 V DX 비공식 한국어 패치" />
+<meta property="og:description" content="테일즈 오브 판타지아 나리키리 던전, 서몬나이트 크래프트 소드 이야기, 기동전사 건담 신 기렌의 야망, 요괴워치 3 스키야키, 발키리 드라이브 비크니, 테일즈 오브 더 월드, 두근두근 메모리얼 이모셔널, 태합입지전 V DX 비공식 한국어 패치" />
 <meta property="og:image" content="./assets/hero.jpg" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -518,7 +518,7 @@
 <div class="notice" id="notice">
   <div class="wrap">
     <span class="tag">공지</span>
-    <p>서몬나이트 크래프트 소드 이야기 <strong>v1.0.3</strong> · 기동전사 건담 신 기렌의 야망 <strong>v0.2.0</strong> 공개.</p>
+    <p>테일즈 오브 판타지아 나리키리 던전 한국어 패치 <strong>v1.0.0</strong> 공개.</p>
     <button type="button" aria-label="공지 닫기" onclick="document.getElementById('notice').remove()">×</button>
   </div>
 </div>
@@ -822,6 +822,66 @@
           </details>
         </article>
 
+        <!-- 테일즈 오브 판타지아 나리키리 던전 -->
+        <article class="card">
+          <div class="card-top">
+            <div class="card-txt">
+              <h3>테일즈 오브 판타지아 나리키리 던전 한국어 패치</h3>
+              <p class="latin">Tales of Phantasia: Narikiri Dungeon &middot; Game Boy Color</p>
+              <p class="meta">v1.0.0 &middot; 2026-08-22 &middot; 약 82KB (xdelta)</p>
+            </div>
+            <div class="card-act">
+              <a class="btn primary"
+                 href="https://github.com/TeamLimRyan/TALES_OF_PHANTASIA_NARIKIRI_DUNGEON_KOREAN_LOCALIZATION_RELEASE/releases/download/v1.0.0/Tales_of_Phantasia_Narikiri_Dungeon_KO.xdelta">↓ 다운로드</a>
+              <a class="btn"
+                 href="https://github.com/TeamLimRyan/TALES_OF_PHANTASIA_NARIKIRI_DUNGEON_KOREAN_LOCALIZATION_RELEASE" target="_blank" rel="noopener">자세히 ↗</a>
+            </div>
+          </div>
+
+          <details class="more">
+            <summary>지원 환경과 설치 방법</summary>
+            <div class="more-body">
+
+              <h4>지원 환경</h4>
+              <ul>
+                <li>게임보이 컬러 일본판 &middot; 헤더 제품 코드 <code>AN6J</code></li>
+                <li>원본 ROM 크기 <code>2,097,152</code> 바이트</li>
+                <li>원본 SHA-256 <code>e3853a07…1db73a05</code></li>
+              </ul>
+              <p style="margin:8px 0 0">
+                파일명이 같아도 SHA-256이 다르면 대상이 아닙니다. 다른 리비전이나 기존 패치가 적용된 ROM에는 쓰지 마세요.
+              </p>
+
+              <h4>반영 범위</h4>
+              <ul>
+                <li>이벤트·마스터/UI 텍스트 2,668행 번역</li>
+                <li>고정 UI 19군·156레코드 한국어화</li>
+                <li>타이틀·시작 프롬프트 등 이미지 자원 5개 처리</li>
+                <li>현대 한글 완성형 11,172자와 28칸 조합식 한글 자판</li>
+                <li><code>ㅜ→ㅓ=ㅝ</code>, <code>임라이언</code>, 이름 확정·SRAM 기록 실제 버튼 검증</li>
+              </ul>
+
+              <h4>설치</h4>
+              <ol>
+                <li>정품 일본판 ROM을 직접 준비합니다.</li>
+                <li><code>Tales_of_Phantasia_Narikiri_Dungeon_KO.xdelta</code>를 내려받습니다.</li>
+                <li><code>python scripts/apply_patch.py "Tales of Phantasia - Narikiri Dungeon (Japan).gbc"</code></li>
+                <li>직접 하려면 <code>xdelta3 -d -s &lt;원본.gbc&gt; &lt;패치.xdelta&gt; narikiri_dungeon_ko.gbc</code></li>
+              </ol>
+
+              <h4>파일 무결성</h4>
+              <p style="margin:0 0 4px">패치 <code>.xdelta</code> SHA-256</p>
+              <code class="hash">7500a2ddc4baf5c087858b204a950f507b23d3f511395637adfea15cfa37fd70</code>
+              <p style="margin:8px 0 4px">적용 결과 ROM SHA-256</p>
+              <code class="hash">cf4bd218396f34d78786ec094a2d0be4531d9f2a7586381b5c2865394acbece2</code>
+              <p style="margin:8px 0 0; color:var(--ink-soft)">
+                원본 ROM, 완성 ROM, BIOS, 세이브 데이터는 배포하지 않습니다.
+              </p>
+
+            </div>
+          </details>
+        </article>
+
         <!-- 테일즈 오브 더 월드 -->
         <article class="card">
           <div class="card-top">
@@ -1030,6 +1090,12 @@
       <h2 class="head">진행 이력</h2>
 
       <ol class="timeline">
+        <li>
+          <span class="date">2026-08-22</span>
+          <ul>
+            <li>테일즈 오브 판타지아 나리키리 던전 한국어 패치 <strong>v1.0.0</strong> 최초 공개 &mdash; 텍스트 2,668행, 이미지 5개, 28칸 조합식 한글 자판</li>
+          </ul>
+        </li>
         <li>
           <span class="date">2026-08-19</span>
           <ul>
