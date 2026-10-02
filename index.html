@@ -518,7 +518,7 @@
 <div class="notice" id="notice">
   <div class="wrap">
     <span class="tag">공지</span>
-    <p>테일즈 오브 판타지아 나리키리 던전 <strong>v1.0.0</strong> 공개 · 서몬나이트 크래프트 소드 이야기 3부작 모두 배포.</p>
+    <p>파워풀 프로야구 2026-2027 <strong>v0.9</strong> 공개 · 서몬나이트 크래프트 소드 이야기 1·2 <strong>v1.0.5</strong>, ~시작의 돌~ <strong>v1.0.2</strong> 업데이트.</p>
     <button type="button" aria-label="공지 닫기" onclick="document.getElementById('notice').remove()">×</button>
   </div>
 </div>
@@ -575,6 +575,275 @@
 
       <div class="cards">
 
+        <!-- 파워풀 프로야구 2026-2027 -->
+        <article class="card">
+          <div class="card-top">
+            <div class="card-txt">
+              <h3>파워풀 프로야구 2026-2027 한국어 패치</h3>
+              <p class="latin">Powerful Pro Yakyuu 2026-2027 &middot; Nintendo Switch</p>
+              <p class="meta">v0.9 &middot; 2026-10-02 &middot; 약 905MB (ZIP)</p>
+            </div>
+            <div class="card-act">
+              <a class="btn primary"
+                 href="https://github.com/TeamLimRyan/PAWAFURU_PRO_YAKYU_2026_2027_KOREAN_LOCALIZATION_RELEASE/releases/download/v0.9/Pawapuro2026_KO_v0.9.zip">↓ 다운로드</a>
+              <a class="btn" href="https://github.com/TeamLimRyan/PAWAFURU_PRO_YAKYU_2026_2027_KOREAN_LOCALIZATION_RELEASE" target="_blank" rel="noopener">자세히 ↗</a>
+            </div>
+          </div>
+
+          <details class="more">
+            <summary>지원 환경과 설치 방법</summary>
+            <div class="more-body">
+
+              <div class="warn">
+                <strong>v0.9는 전체 모드 검증 전 버전입니다.</strong>
+                게임을 새 버전으로 업데이트하기 전에는 반드시 패치를 먼저 지우세요.
+                버전이 바뀌면 실행 파일 패치가 맞지 않고 데이터 파일 오류가 날 수 있습니다.
+              </div>
+
+              <h4>지원 환경</h4>
+              <ul>
+                <li>Nintendo Switch 일본판 &middot; Title ID <code>01007E8023F36000</code></li>
+                <li>Base <code>1.0.0</code> + 업데이트 <code>1.1.0</code> (<code>v65536</code>)만 지원 &middot; 1.0.0 단독, 이후 업데이트, 다른 지역판 미지원</li>
+                <li>Atmosphère 적용 Switch 또는 에뮬레이터(Eden 등)</li>
+                <li>설치기 실행에 Python 3.10 이상과 디스크 여유 공간 약 2GB 필요</li>
+              </ul>
+              <p style="margin:8px 0 0">
+                설치기가 원본 파일을 SHA-256으로 확인하며, 버전이 다르면 설치가 멈춥니다.
+              </p>
+
+              <h4>반영 범위</h4>
+              <ul>
+                <li>텍스트, 한글 글꼴(Noto Sans KR), 승인 이미지 6,957개 반영. 원본 유지로 정한 일부 이미지의 일본어는 남아 있습니다</li>
+                <li>타이틀 로고, 튜토리얼 연도 표기, 게임 시작 버튼 점멸 글자 정렬 수정</li>
+                <li>선수 이름 슬롯 30,867개 일본어 잔존 0, 대전·마이라이프 팀 명단 한글 표시 확인</li>
+              </ul>
+
+              <h4>아직 확인하지 못한 범위</h4>
+              <ul>
+                <li>Switch 실기, 저장·불러오기</li>
+                <li>마이라이프 3월 이후 시즌, 석세스 첫 턴 이후(훈련·이벤트·경기)</li>
+                <li>페넌트, 영관나인, 대전 등 기타 모드</li>
+              </ul>
+
+              <h4>설치</h4>
+              <ol>
+                <li>본인 게임(1.1.0 업데이트 적용)의 romfs에서 <code>cdvdroot</code> 폴더를 추출합니다. <code>RES00.RDB</code>(약 7.5GB), <code>RES00.RDI</code>, <code>RES10.RDB</code>가 필요합니다.</li>
+                <li><code>Pawapuro2026_KO_v0.9.zip</code>을 내려받아 풉니다. 저장소의 Source code ZIP은 설치 패키지가 아닙니다.</li>
+                <li>압축을 푼 폴더에서 <code>pip install -r installer/requirements.txt</code></li>
+                <li><code>python installer/install.py --romfs &lt;cdvdroot 폴더&gt; --out &lt;출력 폴더&gt;</code> (5~10분)</li>
+                <li><strong>Switch:</strong> 출력 폴더의 <code>atmosphere</code> 폴더를 SD 카드 루트에 복사합니다.</li>
+                <li><strong>에뮬레이터:</strong> <code>exefs_patches/pp26_ko/*.ips</code>는 모드 폴더의 <code>exefs/</code>로, <code>contents/01007E8023F36000/romfs/cdvdroot/*</code>는 <code>romfs/cdvdroot/</code>로 넣습니다.</li>
+              </ol>
+
+              <h4>제거</h4>
+              <ul>
+                <li><code>atmosphere/contents/01007E8023F36000/romfs/cdvdroot/</code>의 <code>RES00.RDI</code>, <code>RES10.RDB</code></li>
+                <li><code>atmosphere/exefs_patches/pp26_ko/</code> 폴더</li>
+              </ul>
+              <p style="margin:8px 0 0">
+                온라인 기능은 수정된 게임으로 접속하게 됩니다. 사용 여부는 본인 판단에 맡깁니다.
+              </p>
+
+              <h4>파일 무결성</h4>
+              <p style="margin:0 0 4px"><code>Pawapuro2026_KO_v0.9.zip</code> SHA-256</p>
+              <code class="hash">e235b1a62d9fbcacfaaa254d590ed5cacdfd0b4f30cd34a9af833daf05693dc7</code>
+              <p style="margin:8px 0 0; color:var(--ink-soft)">
+                원본 게임, 키, 펌웨어, 저장 데이터는 포함하지 않습니다.
+              </p>
+
+            </div>
+          </details>
+        </article>
+
+        <!-- 서몬나이트 크래프트 소드 -->
+        <article class="card">
+          <div class="card-top">
+            <div class="card-txt">
+              <h3>서몬나이트 크래프트 소드 이야기 한국어 패치</h3>
+              <p class="latin">Summon Night: Craft Sword Monogatari &middot; Game Boy Advance</p>
+              <p class="meta">v1.0.5 &middot; 2026-10-02 &middot; 약 926KB (xdelta)</p>
+            </div>
+            <div class="card-act">
+              <a class="btn primary"
+                 href="https://github.com/TeamLimRyan/SUMMON_NIGHT_CRAFT_SWORD_MONOGATARI_KOREAN_LOCALIZATION_RELEASE/releases/download/v1.0.5/Summon_Night_Craft_Sword_Monogatari_KO.xdelta">↓ 다운로드</a>
+              <a class="btn" href="https://github.com/TeamLimRyan/SUMMON_NIGHT_CRAFT_SWORD_MONOGATARI_KOREAN_LOCALIZATION_RELEASE" target="_blank" rel="noopener">자세히 ↗</a>
+            </div>
+          </div>
+
+          <details class="more">
+            <summary>지원 환경과 설치 방법</summary>
+            <div class="more-body">
+
+              <h4>지원 환경</h4>
+              <ul>
+                <li>게임보이 어드밴스 일본판 &middot; 게임 코드 <code>AB4J</code></li>
+                <li>원본 ROM 크기 <code>8,388,608</code> 바이트</li>
+                <li>원본 SHA-256 <code>3f7ec3d2…663a4f</code></li>
+              </ul>
+              <p style="margin:8px 0 0">
+                깨끗한 원본 ROM에 적용하세요. 이전 패치가 적용된 결과물에 덧씌우면 안 됩니다.
+              </p>
+
+              <h4>반영 범위</h4>
+              <ul>
+                <li>활성 텍스트 30,812행 번역</li>
+                <li>이미지 텍스트 자산 72개와 런타임 타이틀·메뉴 보정 7건</li>
+                <li>클리어 세이브에서 해금되는 타이틀 메뉴 <code>불러오기</code>·<code>통신</code> 그래픽 한국어화 (v1.0.4)</li>
+                <li>장비·비전·액세서리·아이템·귀중품 이름 표시를 한글 문자열로 연결</li>
+                <li>하단 메뉴의 <code>LR:캐릭터 전환</code>·<code>LR:입력 전환</code> 그래픽 한국어화</li>
+                <li>현대 한글 완성형 11,172자 글리프, 조합식 한글 이름 입력과 자모 키보드</li>
+                <li>무기 종류별 아이콘·비전 판정 회귀와 도끼·창·드릴 계열 진행 정지 수정</li>
+                <li>빠른 대사 출력에서 다음 대사로 넘어가지 못하던 프리징 수정 (v1.0.5)</li>
+                <li>이름 치환 후 줄이 넘치던 대사 43행 조정, 마스터 이름 폭 계산 보정 (v1.0.5)</li>
+              </ul>
+
+              <h4>설치</h4>
+              <ol>
+                <li>정품 일본판 ROM을 직접 준비합니다.</li>
+                <li><code>Summon_Night_Craft_Sword_Monogatari_KO.xdelta</code>를 내려받습니다.</li>
+                <li><code>python scripts/apply_patch.py "Summon Night - Craft Sword Monogatari (Japan).gba"</code></li>
+                <li>직접 하려면 <code>xdelta3 -d -s &lt;원본.gba&gt; &lt;패치.xdelta&gt; summon_night_craft_sword_ko.gba</code></li>
+              </ol>
+
+              <h4>파일 무결성</h4>
+              <p style="margin:0 0 4px">패치 <code>.xdelta</code> SHA-256</p>
+              <code class="hash">0b6f7375e4429e023906f3e9f855d74efaf8cdad331f96edb10577e8ab69209b</code>
+              <p style="margin:8px 0 4px">적용 결과 ROM SHA-256 (<code>16,777,216</code> 바이트)</p>
+              <code class="hash">219be47d5fedb1e8efa6a7672b7cc3445fa93875f31f633656373b839d188fa7</code>
+              <p style="margin:8px 0 0; color:var(--ink-soft)">
+                원본 ROM, 완성 ROM, BIOS, 세이브 데이터는 배포하지 않습니다.
+              </p>
+
+            </div>
+          </details>
+        </article>
+
+        <!-- 서몬나이트 크래프트 소드 2 -->
+        <article class="card">
+          <div class="card-top">
+            <div class="card-txt">
+              <h3>서몬나이트 크래프트 소드 이야기 2 한국어 패치</h3>
+              <p class="latin">Summon Night: Craft Sword Monogatari 2 &middot; Game Boy Advance</p>
+              <p class="meta">v1.0.5 &middot; 2026-10-02 &middot; 약 1.5MB (xdelta)</p>
+            </div>
+            <div class="card-act">
+              <a class="btn primary"
+                 href="https://github.com/TeamLimRyan/SUMMON_NIGHT_CRAFT_SWORD_MONOGATARI_2_KOREAN_LOCALIZATION_RELEASE/releases/download/v1.0.5/Summon_Night_Craft_Sword_Monogatari_2_KO.xdelta">↓ 다운로드</a>
+              <a class="btn" href="https://github.com/TeamLimRyan/SUMMON_NIGHT_CRAFT_SWORD_MONOGATARI_2_KOREAN_LOCALIZATION_RELEASE" target="_blank" rel="noopener">자세히 ↗</a>
+            </div>
+          </div>
+
+          <details class="more">
+            <summary>지원 환경과 설치 방법</summary>
+            <div class="more-body">
+
+              <h4>지원 환경</h4>
+              <ul>
+                <li>게임보이 어드밴스 일본판 &middot; 게임 코드 <code>BSKJ</code></li>
+                <li>원본 ROM 크기 <code>16,777,216</code> 바이트</li>
+                <li>원본 SHA-256 <code>9abbff51…64360f</code></li>
+              </ul>
+              <p style="margin:8px 0 0">
+                깨끗한 원본 ROM에 적용하세요. 이전 패치가 적용된 결과물에 덧씌우면 안 됩니다.
+              </p>
+
+              <h4>반영 범위</h4>
+              <ul>
+                <li>텍스트 슬롯 42,661개 한국어 빌드 반영</li>
+                <li>이미지 120건 중 116건 한국어화, 비문자 자산 4건은 원본 유지</li>
+                <li>현대 한글 완성형 11,172자와 자모 40자 글리프</li>
+                <li>조합식 한글 이름 입력과 한글 자모 키보드</li>
+                <li>환경 설정 진입 화면의 그래픽 2개는 타일 깨짐을 막기 위해 원본 <code>CONFIG</code> 그래픽을 씁니다 (v1.0.1)</li>
+                <li>전투 결과 UI 패키지 2개와 저수준 리소스 25개는 화면 잘림을 막기 위해 일본판 원본으로 복원 (v1.0.2)</li>
+                <li>대화 프리징 수정: 원문 슬롯보다 긴 대사 11,857문장을 용량 안전 기준으로 재번역 (v1.0.3)</li>
+                <li>고정 텍스트 1,980개를 원래 슬롯에 한국어로 저장, 누락된 1칸 선택지 표시 수정 (v1.0.4)</li>
+                <li>활성 번역 42,661행 전체를 원문과 장면 문맥 기준으로 재검토해 29,846행 재번역, 인물별 말투와 용어 통일 (v1.0.5)</li>
+                <li>영수 이름 키보드에서 한글이 입력되던 문제와 빈 한글 키 입력 오류 수정 (v1.0.5)</li>
+              </ul>
+
+              <h4>설치</h4>
+              <ol>
+                <li>정품 일본판 ROM을 직접 준비합니다.</li>
+                <li><code>Summon_Night_Craft_Sword_Monogatari_2_KO.xdelta</code>를 내려받습니다.</li>
+                <li><code>python scripts/apply_patch.py "Summon Night - Craft Sword Monogatari 2 (Japan).gba"</code></li>
+                <li>직접 하려면 <code>xdelta3 -d -s &lt;원본.gba&gt; &lt;패치.xdelta&gt; summon_night_2_ko.gba</code></li>
+              </ol>
+
+              <h4>파일 무결성</h4>
+              <p style="margin:0 0 4px">패치 <code>.xdelta</code> SHA-256</p>
+              <code class="hash">0187b5d95bc37b2dd2e1fe59c396626ea0f4617f513ecc7ce965fa039b8717f6</code>
+              <p style="margin:8px 0 4px">적용 결과 ROM SHA-256</p>
+              <code class="hash">2aa03800e2e8024a0331df1fe49159c0669ab5e043b1a9ea9d3bc51de7ad8cdb</code>
+              <p style="margin:8px 0 0; color:var(--ink-soft)">
+                원본 ROM, 완성 ROM, BIOS, 세이브 데이터는 배포하지 않습니다.
+              </p>
+
+            </div>
+          </details>
+        </article>
+
+        <!-- 서몬나이트 시작의 돌 -->
+        <article class="card">
+          <div class="card-top">
+            <div class="card-txt">
+              <h3>서몬나이트 크래프트 소드 이야기 ~시작의 돌~ 한국어 패치</h3>
+              <p class="latin">Summon Night: Craft Sword Monogatari &mdash; Hajimari no Ishi &middot; Game Boy Advance</p>
+              <p class="meta">v1.0.2 &middot; 2026-09-25 &middot; 약 5MB (xdelta)</p>
+            </div>
+            <div class="card-act">
+              <a class="btn primary"
+                 href="https://github.com/TeamLimRyan/SUMMON_NIGHT_CRAFT_SWORD_MONOGATARI_HAJIMARI_NO_ISHI_KOREAN_LOCALIZATION_RELEASE/releases/download/v1.0.2/Summon_Night_Craft_Sword_Monogatari_Hajimari_no_Ishi_KO.xdelta">↓ 다운로드</a>
+              <a class="btn" href="https://github.com/TeamLimRyan/SUMMON_NIGHT_CRAFT_SWORD_MONOGATARI_HAJIMARI_NO_ISHI_KOREAN_LOCALIZATION_RELEASE" target="_blank" rel="noopener">자세히 ↗</a>
+            </div>
+          </div>
+
+          <details class="more">
+            <summary>지원 환경과 설치 방법</summary>
+            <div class="more-body">
+
+              <h4>지원 환경</h4>
+              <ul>
+                <li>게임보이 어드밴스 일본판 &middot; 게임 코드 <code>B3CJ</code></li>
+                <li>원본 ROM 크기 <code>33,554,432</code> 바이트</li>
+                <li>원본 SHA-256 <code>39bc4cf4…7fad2d</code></li>
+              </ul>
+              <p style="margin:8px 0 0">
+                이전 한국어 ROM에 덧씌우지 말고 깨끗한 원본에 새로 적용하세요.
+                이전 버전의 세이브스테이트 대신 새로 부팅해 게임 안의 저장 데이터를 불러오면 됩니다.
+              </p>
+
+              <h4>반영 범위</h4>
+              <ul>
+                <li>정본 텍스트 43,101행과 PSI 문자열 1,769행, 합계 44,870행</li>
+                <li>이미지 149건 중 143건 한국어화, 6건은 원본 유지</li>
+                <li>고정 길이 위치명 필드 136건을 추가 발굴해 상태 메뉴의 일본어 잔재와 후행 깨짐 제거 (v1.0.1)</li>
+                <li>한글과 원래 치환 명령의 코드 충돌 수정, 전각 공백 때문에 빠졌던 고정 필드 525개와 PSI 필드 660개(도감 설명 134개 포함) 번역 (v1.0.2)</li>
+                <li>세이브 목록 지명, 귀중품 동적 이름, 도감 설명 표시와 긴 아이템명 대사 양식 3개 수정 (v1.0.2)</li>
+                <li>현대 한글 완성형 11,172자와 자모 51자 글리프</li>
+                <li>조합식 한글 이름 입력과 한글 자모 키보드</li>
+              </ul>
+
+              <h4>설치</h4>
+              <ol>
+                <li>정품 일본판 ROM을 직접 준비합니다.</li>
+                <li><code>Summon_Night_Craft_Sword_Monogatari_Hajimari_no_Ishi_KO.xdelta</code>를 내려받습니다.</li>
+                <li><code>python scripts/apply_patch.py "Summon Night - Craft Sword Monogatari - Hajimari no Ishi (Japan).gba"</code></li>
+                <li>직접 하려면 <code>xdelta3 -d -s &lt;원본.gba&gt; &lt;패치.xdelta&gt; hajimari_no_ishi_ko.gba</code></li>
+              </ol>
+
+              <h4>파일 무결성</h4>
+              <p style="margin:0 0 4px">패치 <code>.xdelta</code> SHA-256</p>
+              <code class="hash">26b8da47a3d3e45f2838115140023fca588f44c90c78bde48fbf06bd1cbc7c01</code>
+              <p style="margin:8px 0 4px">적용 결과 ROM SHA-256</p>
+              <code class="hash">8d7efa27855099ab9e47cd5bbe8786aba009ef04e7eaabdf99d796823555012f</code>
+              <p style="margin:8px 0 0; color:var(--ink-soft)">
+                원본 ROM, 완성 ROM, BIOS, 세이브 데이터는 배포하지 않습니다.
+              </p>
+
+            </div>
+          </details>
+        </article>
+
         <!-- 테일즈 오브 판타지아 나리키리 던전 -->
         <article class="card">
           <div class="card-top">
@@ -628,179 +897,6 @@
               <code class="hash">7500a2ddc4baf5c087858b204a950f507b23d3f511395637adfea15cfa37fd70</code>
               <p style="margin:8px 0 4px">적용 결과 ROM SHA-256 (<code>4,194,304</code> 바이트)</p>
               <code class="hash">cf4bd218396f34d78786ec094a2d0be4531d9f2a7586381b5c2865394acbece2</code>
-              <p style="margin:8px 0 0; color:var(--ink-soft)">
-                원본 ROM, 완성 ROM, BIOS, 세이브 데이터는 배포하지 않습니다.
-              </p>
-
-            </div>
-          </details>
-        </article>
-
-        <!-- 서몬나이트 시작의 돌 -->
-        <article class="card">
-          <div class="card-top">
-            <div class="card-txt">
-              <h3>서몬나이트 크래프트 소드 이야기 ~시작의 돌~ 한국어 패치</h3>
-              <p class="latin">Summon Night: Craft Sword Monogatari &mdash; Hajimari no Ishi &middot; Game Boy Advance</p>
-              <p class="meta">v1.0.1 &middot; 2026-08-22 &middot; 약 5MB (xdelta)</p>
-            </div>
-            <div class="card-act">
-              <a class="btn primary"
-                 href="https://github.com/TeamLimRyan/SUMMON_NIGHT_CRAFT_SWORD_MONOGATARI_HAJIMARI_NO_ISHI_KOREAN_LOCALIZATION_RELEASE/releases/download/v1.0.1/Summon_Night_Craft_Sword_Monogatari_Hajimari_no_Ishi_KO.xdelta">↓ 다운로드</a>
-              <a class="btn" href="https://github.com/TeamLimRyan/SUMMON_NIGHT_CRAFT_SWORD_MONOGATARI_HAJIMARI_NO_ISHI_KOREAN_LOCALIZATION_RELEASE" target="_blank" rel="noopener">자세히 ↗</a>
-            </div>
-          </div>
-
-          <details class="more">
-            <summary>지원 환경과 설치 방법</summary>
-            <div class="more-body">
-
-              <h4>지원 환경</h4>
-              <ul>
-                <li>게임보이 어드밴스 일본판 &middot; 게임 코드 <code>B3CJ</code></li>
-                <li>원본 ROM 크기 <code>33,554,432</code> 바이트</li>
-                <li>원본 SHA-256 <code>39bc4cf4…7fad2d</code></li>
-              </ul>
-
-              <h4>반영 범위</h4>
-              <ul>
-                <li>정본 텍스트 43,101행과 PSI 문자열 1,769행, 합계 44,870행</li>
-                <li>이미지 149건 중 143건 한국어화, 6건은 원본 유지</li>
-                <li>고정 길이 위치명 필드 136건을 추가 발굴해 상태 메뉴의 일본어 잔재와 후행 깨짐 제거 (v1.0.1)</li>
-                <li>현대 한글 완성형 11,172자와 자모 51자 글리프</li>
-                <li>조합식 한글 이름 입력과 한글 자모 키보드</li>
-              </ul>
-
-              <h4>설치</h4>
-              <ol>
-                <li>정품 일본판 ROM을 직접 준비합니다.</li>
-                <li><code>Summon_Night_Craft_Sword_Monogatari_Hajimari_no_Ishi_KO.xdelta</code>를 내려받습니다.</li>
-                <li><code>python scripts/apply_patch.py "Summon Night - Craft Sword Monogatari - Hajimari no Ishi (Japan).gba"</code></li>
-                <li>직접 하려면 <code>xdelta3 -d -s &lt;원본.gba&gt; &lt;패치.xdelta&gt; hajimari_no_ishi_ko.gba</code></li>
-              </ol>
-
-              <h4>파일 무결성</h4>
-              <p style="margin:0 0 4px">패치 <code>.xdelta</code> SHA-256</p>
-              <code class="hash">edd93620b0a5b3f7b62b3cbf1ffa736a885a3d34efb3319a6ccac708b4b43c38</code>
-              <p style="margin:8px 0 4px">적용 결과 ROM SHA-256</p>
-              <code class="hash">6ead73b40a6b8dbfb873646ef749ce557487227a443e17bb3c1588c49ef09060</code>
-              <p style="margin:8px 0 0; color:var(--ink-soft)">
-                원본 ROM, 완성 ROM, BIOS, 세이브 데이터는 배포하지 않습니다.
-              </p>
-
-            </div>
-          </details>
-        </article>
-
-        <!-- 서몬나이트 크래프트 소드 -->
-        <article class="card">
-          <div class="card-top">
-            <div class="card-txt">
-              <h3>서몬나이트 크래프트 소드 이야기 한국어 패치</h3>
-              <p class="latin">Summon Night: Craft Sword Monogatari &middot; Game Boy Advance</p>
-              <p class="meta">v1.0.4 &middot; 2026-08-20 &middot; 약 908KB (xdelta)</p>
-            </div>
-            <div class="card-act">
-              <a class="btn primary"
-                 href="https://github.com/TeamLimRyan/SUMMON_NIGHT_CRAFT_SWORD_MONOGATARI_KOREAN_LOCALIZATION_RELEASE/releases/download/v1.0.4/Summon_Night_Craft_Sword_Monogatari_KO.xdelta">↓ 다운로드</a>
-              <a class="btn" href="https://github.com/TeamLimRyan/SUMMON_NIGHT_CRAFT_SWORD_MONOGATARI_KOREAN_LOCALIZATION_RELEASE" target="_blank" rel="noopener">자세히 ↗</a>
-            </div>
-          </div>
-
-          <details class="more">
-            <summary>지원 환경과 설치 방법</summary>
-            <div class="more-body">
-
-              <h4>지원 환경</h4>
-              <ul>
-                <li>게임보이 어드밴스 일본판 &middot; 게임 코드 <code>AB4J</code></li>
-                <li>원본 ROM 크기 <code>8,388,608</code> 바이트</li>
-                <li>원본 SHA-256 <code>3f7ec3d2…663a4f</code></li>
-              </ul>
-              <p style="margin:8px 0 0">
-                깨끗한 원본 ROM에 적용하세요. 이전 패치가 적용된 결과물에 덧씌우면 안 됩니다.
-              </p>
-
-              <h4>반영 범위</h4>
-              <ul>
-                <li>활성 텍스트 30,812행 번역</li>
-                <li>이미지 텍스트 자산 72개와 런타임 타이틀·메뉴 보정 7건</li>
-                <li>클리어 세이브에서 해금되는 타이틀 메뉴 <code>불러오기</code>·<code>통신</code> 그래픽 한국어화 (v1.0.4)</li>
-                <li>장비·비전·액세서리·아이템·귀중품 이름 표시를 한글 문자열로 연결</li>
-                <li>하단 메뉴의 <code>LR:캐릭터 전환</code>·<code>LR:입력 전환</code> 그래픽 한국어화</li>
-                <li>현대 한글 완성형 11,172자 글리프, 조합식 한글 이름 입력과 자모 키보드</li>
-                <li>무기 종류별 아이콘·비전 판정 회귀와 도끼·창·드릴 계열 진행 정지 수정</li>
-              </ul>
-
-              <h4>설치</h4>
-              <ol>
-                <li>정품 일본판 ROM을 직접 준비합니다.</li>
-                <li><code>Summon_Night_Craft_Sword_Monogatari_KO.xdelta</code>를 내려받습니다.</li>
-                <li><code>python scripts/apply_patch.py "Summon Night - Craft Sword Monogatari (Japan).gba"</code></li>
-                <li>직접 하려면 <code>xdelta3 -d -s &lt;원본.gba&gt; &lt;패치.xdelta&gt; summon_night_craft_sword_ko.gba</code></li>
-              </ol>
-
-              <h4>파일 무결성</h4>
-              <p style="margin:0 0 4px">패치 <code>.xdelta</code> SHA-256</p>
-              <code class="hash">36d87514d284b450640167dd844d98801dcb67ec3dff02ad70d7019cece8a2dd</code>
-              <p style="margin:8px 0 4px">적용 결과 ROM SHA-256 (<code>16,777,216</code> 바이트)</p>
-              <code class="hash">6fedb9a082502a1e270a51a6eb900ffde62b837b82c695300d3aaa2490f9631d</code>
-              <p style="margin:8px 0 0; color:var(--ink-soft)">
-                원본 ROM, 완성 ROM, BIOS, 세이브 데이터는 배포하지 않습니다.
-              </p>
-
-            </div>
-          </details>
-        </article>
-
-        <!-- 서몬나이트 크래프트 소드 2 -->
-        <article class="card">
-          <div class="card-top">
-            <div class="card-txt">
-              <h3>서몬나이트 크래프트 소드 이야기 2 한국어 패치</h3>
-              <p class="latin">Summon Night: Craft Sword Monogatari 2 &middot; Game Boy Advance</p>
-              <p class="meta">v1.0.1 &middot; 2026-08-20 &middot; 약 1.4MB (xdelta)</p>
-            </div>
-            <div class="card-act">
-              <a class="btn primary"
-                 href="https://github.com/TeamLimRyan/SUMMON_NIGHT_CRAFT_SWORD_MONOGATARI_2_KOREAN_LOCALIZATION_RELEASE/releases/download/v1.0.1/Summon_Night_Craft_Sword_Monogatari_2_KO.xdelta">↓ 다운로드</a>
-              <a class="btn" href="https://github.com/TeamLimRyan/SUMMON_NIGHT_CRAFT_SWORD_MONOGATARI_2_KOREAN_LOCALIZATION_RELEASE" target="_blank" rel="noopener">자세히 ↗</a>
-            </div>
-          </div>
-
-          <details class="more">
-            <summary>지원 환경과 설치 방법</summary>
-            <div class="more-body">
-
-              <h4>지원 환경</h4>
-              <ul>
-                <li>게임보이 어드밴스 일본판 &middot; 게임 코드 <code>BSKJ</code></li>
-                <li>원본 ROM 크기 <code>16,777,216</code> 바이트</li>
-                <li>원본 SHA-256 <code>9abbff51…64360f</code></li>
-              </ul>
-
-              <h4>반영 범위</h4>
-              <ul>
-                <li>텍스트 슬롯 42,661개 한국어 빌드 반영</li>
-                <li>이미지 120건 중 116건 한국어화, 비문자 자산 4건은 원본 유지</li>
-                <li>현대 한글 완성형 11,172자와 자모 40자 글리프</li>
-                <li>조합식 한글 이름 입력과 한글 자모 키보드</li>
-                <li>환경 설정 진입 화면의 그래픽 2개는 타일 깨짐을 막기 위해 원본 <code>CONFIG</code> 그래픽을 씁니다 (v1.0.1)</li>
-              </ul>
-
-              <h4>설치</h4>
-              <ol>
-                <li>정품 일본판 ROM을 직접 준비합니다.</li>
-                <li><code>Summon_Night_Craft_Sword_Monogatari_2_KO.xdelta</code>를 내려받습니다.</li>
-                <li><code>python scripts/apply_patch.py "Summon Night - Craft Sword Monogatari 2 (Japan).gba"</code></li>
-                <li>직접 하려면 <code>xdelta3 -d -s &lt;원본.gba&gt; &lt;패치.xdelta&gt; summon_night_2_ko.gba</code></li>
-              </ol>
-
-              <h4>파일 무결성</h4>
-              <p style="margin:0 0 4px">패치 <code>.xdelta</code> SHA-256</p>
-              <code class="hash">a3d56a6a27ac24d61f835997440542a25c72f79ad567f67843e00acfac3e6619</code>
-              <p style="margin:8px 0 4px">적용 결과 ROM SHA-256</p>
-              <code class="hash">1c057a8e65676ec38e9cbd1ee6b5c60eab48ba6bd6f456d7574ae71b289a2b14</code>
               <p style="margin:8px 0 0; color:var(--ink-soft)">
                 원본 ROM, 완성 ROM, BIOS, 세이브 데이터는 배포하지 않습니다.
               </p>
@@ -944,6 +1040,7 @@
             </div>
           </details>
         </article>
+
         <!-- 발키리 드라이브 비크니 -->
         <article class="card">
           <div class="card-top">
@@ -1063,7 +1160,6 @@
             </div>
           </details>
         </article>
-
 
         <!-- 두근두근 메모리얼 -->
         <article class="card">
@@ -1204,6 +1300,38 @@
       <h2 class="head">진행 이력</h2>
 
       <ol class="timeline">
+        <li>
+          <span class="date">2026-10-02</span>
+          <ul>
+            <li>파워풀 프로야구 2026-2027 한국어 패치 <strong>v0.9</strong> 공개 &mdash; 텍스트·한글 글꼴·이미지 6,957개, 전체 모드 검증 전 버전</li>
+            <li>서몬나이트 크래프트 소드 이야기 <strong>v1.0.5</strong> 배포 &mdash; 빠른 대사 출력 프리징 수정</li>
+            <li>서몬나이트 크래프트 소드 이야기 2 <strong>v1.0.5</strong> 배포 &mdash; 전체 42,661행 재검토, 29,846행 재번역</li>
+          </ul>
+        </li>
+        <li>
+          <span class="date">2026-09-30</span>
+          <ul>
+            <li>서몬나이트 크래프트 소드 이야기 2 <strong>v1.0.4</strong> 배포 &mdash; 고정 텍스트 1,980개를 원래 슬롯에 한국어로 저장</li>
+          </ul>
+        </li>
+        <li>
+          <span class="date">2026-09-25</span>
+          <ul>
+            <li>서몬나이트 크래프트 소드 이야기 ~시작의 돌~ <strong>v1.0.2</strong> 배포 &mdash; 문자 코드 충돌 수정, 고정·PSI 필드 1,185개 번역 보강</li>
+          </ul>
+        </li>
+        <li>
+          <span class="date">2026-08-24</span>
+          <ul>
+            <li>서몬나이트 크래프트 소드 이야기 2 <strong>v1.0.3</strong> 배포 &mdash; 대화 프리징 수정, 긴 대사 11,857문장 재번역</li>
+          </ul>
+        </li>
+        <li>
+          <span class="date">2026-08-23</span>
+          <ul>
+            <li>서몬나이트 크래프트 소드 이야기 2 <strong>v1.0.2</strong> 배포 &mdash; 진행 불가 대화 수정, 전투 결과 화면 원본 복원</li>
+          </ul>
+        </li>
         <li>
           <span class="date">2026-08-22</span>
           <ul>
